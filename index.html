@@ -1,1736 +1,1683 @@
 <!DOCTYPE html>
 <html lang="id" class="h-full bg-slate-900 text-slate-100">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Adventure: Sistem Persamaan Linear (TERPADU JSIT)</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            900: '#0c4a6e',
-                        },
-                        emeraldCustom: '#10b981',
-                        gold: '#fbbf24'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logaritma TERPADU — Matematika SMA</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0F172A',
+              teal: '#0D9488',
+              emerald: '#10B981',
+              sky: '#0284C7',
+              amber: '#F59E0B',
+              purple: '#8B5CF6',
+              rose: '#F43F5E'
             }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
         }
-    </script>
-    <style>
-        .glass-panel {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.25s ease;
-        }
-        .glass-card:hover {
-            border-color: rgba(56, 189, 248, 0.4);
-            transform: translateY(-2px);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.6);
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); }
-            50% { box-shadow: 0 0 25px rgba(14, 165, 233, 0.6); }
-        }
-        .glow-active {
-            animation: pulse-glow 2s infinite;
-        }
-    </style>
+      }
+    }
+  </script>
+
+  <!-- Google Font: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- KaTeX for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .glass-card-hover {
+      transition: all 0.25s ease-in-out;
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-2px);
+      border-color: rgba(13, 148, 136, 0.5);
+      box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.2);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(51, 65, 85, 0.8);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(13, 148, 136, 0.8);
+    }
+    /* Islamic Subtle Pattern Overlay */
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(13, 148, 136, 0.08) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    /* Pulsing effect for interactive elements */
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(13, 148, 136, 0.3); }
+      50% { box-shadow: 0 0 25px rgba(13, 148, 136, 0.6); }
+    }
+    .glow-pulse {
+      animation: pulseGlow 2s infinite;
+    }
+  </style>
 </head>
-<body class="h-full flex flex-col font-sans overflow-x-hidden select-none bg-slate-950 text-slate-100">
+<body class="h-full bg-slate-950 text-slate-100 bg-islamic-pattern custom-scrollbar flex flex-col antialiased">
 
-    <!-- TOP NAVBAR -->
-    <header id="main-header" class="hidden sticky top-0 z-40 bg-slate-900/90 backdrop-blur border-b border-slate-800 px-4 py-3">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-400 flex items-center justify-center font-bold text-xl shadow-lg text-white">
-                    <i class="fa-solid fa-square-root-variable"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-base md:text-lg text-slate-100 leading-tight">Math Adventure</h1>
-                    <p class="text-xs text-brand-400 font-medium">SPLDV — JSIT TERPADU</p>
-                </div>
-            </div>
-
-            <!-- User Stats Summary Bar -->
-            <div class="flex items-center space-x-3 md:space-x-6">
-                <!-- XP Badge -->
-                <div class="flex items-center space-x-2 bg-slate-800/80 border border-slate-700/80 px-3 py-1.5 rounded-full">
-                    <i class="fa-solid fa-star text-gold text-sm animate-bounce"></i>
-                    <span id="user-xp-display" class="font-bold text-sm text-gold">0 XP</span>
-                </div>
-
-                <!-- Level Badge -->
-                <div class="hidden sm:flex items-center space-x-2 bg-brand-900/40 border border-brand-500/30 px-3 py-1.5 rounded-full">
-                    <i class="fa-solid fa-shield-halved text-brand-400 text-sm"></i>
-                    <span id="user-level-display" class="font-semibold text-xs text-brand-300">Lvl 1 - Math Explorer</span>
-                </div>
-
-                <!-- User Profile Trigger -->
-                <div class="flex items-center space-x-2 pl-2 border-l border-slate-800">
-                    <div class="w-8 h-8 rounded-full bg-slate-700 border border-brand-400 flex items-center justify-center text-xs font-bold text-brand-300" id="user-avatar-initial">
-                        S
-                    </div>
-                    <div class="hidden md:block text-left">
-                        <div id="user-name-display" class="text-xs font-semibold text-slate-200">Siswa</div>
-                        <div id="user-class-display" class="text-[10px] text-slate-400">Kelas X</div>
-                    </div>
-                </div>
-            </div>
+  <div id="app" class="flex-1 flex flex-col min-h-screen">
+    
+    <!-- Top Navigation Header -->
+    <header id="main-header" class="hidden sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-4 py-3">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        
+        <!-- App Title & Logo -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="app.navigateTo('dashboard')">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-teal to-brand-sky flex items-center justify-center text-white shadow-lg shadow-brand-teal/20 font-extrabold text-lg">
+            log
+          </div>
+          <div>
+            <h1 class="text-base font-bold text-white tracking-wide leading-tight">LOGARITMA <span class="text-brand-teal">TERPADU</span></h1>
+            <p class="text-xs text-slate-400 font-medium">Matematika SMA — JSIT Approach</p>
+          </div>
         </div>
+
+        <!-- Student Profile Quick Stats -->
+        <div class="flex items-center gap-2 sm:gap-4">
+          <!-- Level & XP Badge -->
+          <div class="bg-slate-800/80 border border-slate-700/60 rounded-xl px-3 py-1.5 flex items-center gap-2">
+            <i class="fa-solid fa-trophy text-amber-400 text-sm"></i>
+            <div class="text-xs">
+              <span id="header-level" class="font-bold text-amber-400 block leading-tight">Level 1</span>
+              <span id="header-xp" class="text-slate-300 font-semibold">0 XP</span>
+            </div>
+          </div>
+
+          <!-- Streak -->
+          <div class="hidden sm:flex bg-slate-800/80 border border-slate-700/60 rounded-xl px-3 py-1.5 items-center gap-2">
+            <i class="fa-solid fa-fire text-rose-500 text-sm animate-pulse"></i>
+            <div class="text-xs">
+              <span class="text-slate-400 block leading-tight">Streak</span>
+              <span id="header-streak" class="text-slate-200 font-bold">1 Hari</span>
+            </div>
+          </div>
+
+          <!-- Active User Button / Switcher -->
+          <button onclick="app.openUserSwitchModal()" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-xl border border-slate-700 text-xs font-semibold transition">
+            <i class="fa-solid fa-circle-user text-brand-sky text-base"></i>
+            <span id="header-student-name" class="max-w-[80px] sm:max-w-[120px] truncate">Siswa</span>
+            <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+          </button>
+        </div>
+      </div>
     </header>
 
-    <!-- MAIN CONTENT VIEWPORT -->
-    <div class="flex-1 flex overflow-hidden relative">
-        <!-- Desktop Sidebar Navigation -->
-        <aside id="desktop-sidebar" class="hidden lg:flex flex-col w-64 bg-slate-900 border-r border-slate-800 p-4 space-y-6 overflow-y-auto custom-scrollbar">
+    <!-- MAIN VIEW CONTAINER -->
+    <main class="flex-1 flex flex-col max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+      
+      <!-- SCREEN 1: WELCOME & STUDENT IDENTITY -->
+      <section id="view-welcome" class="flex-1 flex items-center justify-center py-6">
+        <div class="w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-2xl relative overflow-hidden">
+          
+          <div class="absolute -top-12 -right-12 w-40 h-40 bg-brand-teal/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-12 -left-12 w-40 h-40 bg-brand-sky/20 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="text-center mb-8 relative">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-teal via-brand-sky to-brand-emerald text-white text-2xl font-bold shadow-xl shadow-brand-teal/30 mb-4">
+              <i class="fa-solid fa-compass-drafting"></i>
+            </div>
+            <h2 class="text-2xl font-extrabold text-white tracking-tight">LOGARITMA TERPADU</h2>
+            <p class="text-sm text-slate-400 mt-1">Pembelajaran Interaktif Berbasis Sifat & Aplikasi Realitas (JSIT)</p>
+          </div>
+
+          <form onsubmit="app.handleStudentLogin(event)" class="space-y-5">
             <div>
-                <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 px-2">Menu Utama</p>
-                <nav class="space-y-1" id="desktop-nav-links">
-                    <!-- Nav items injected dynamically -->
-                </nav>
+              <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Nama Lengkap</label>
+              <div class="relative">
+                <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                <input type="text" id="input-name" required placeholder="Masukkan nama kamu..." class="w-full bg-slate-900/90 border border-slate-700 rounded-xl py-3 pl-11 pr-4 text-sm text-white focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition">
+              </div>
             </div>
 
-            <div class="pt-4 border-t border-slate-800">
-                <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 px-2">Progress Belajar</p>
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
-                    <div class="flex justify-between text-xs">
-                        <span class="text-slate-400">Total Selesai</span>
-                        <span id="sidebar-progress-percent" class="font-bold text-brand-400">0%</span>
-                    </div>
-                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                        <div id="sidebar-progress-bar" class="bg-gradient-to-r from-brand-500 to-cyan-400 h-full w-0 transition-all duration-500"></div>
-                    </div>
-                </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Kelas</label>
+              <div class="relative">
+                <i class="fa-solid fa-graduation-cap absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                <select id="input-class" required class="w-full bg-slate-900/90 border border-slate-700 rounded-xl py-3 pl-11 pr-4 text-sm text-white focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition appearance-none cursor-pointer">
+                  <option value="X">Kelas X SMA/MA</option>
+                  <option value="XI">Kelas XI SMA/MA</option>
+                  <option value="XII">Kelas XII SMA/MA</option>
+                </select>
+                <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-xs"></i>
+              </div>
             </div>
 
-            <!-- Recent Badges Widget -->
-            <div class="pt-2">
-                <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 px-2">Pencapaian Terbaru</p>
-                <div id="sidebar-badges-container" class="flex flex-wrap gap-2 px-1">
-                    <span class="text-xs text-slate-500 italic">Belum ada badge</span>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Dynamic Main Display Screen -->
-        <main id="main-screen-container" class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 custom-scrollbar bg-slate-950">
-            <!-- Screen content loaded dynamically via JavaScript -->
-        </main>
-    </div>
-
-    <!-- MOBILE BOTTOM NAVIGATION BAR -->
-    <nav id="mobile-nav" class="hidden lg:hidden sticky bottom-0 z-40 bg-slate-900/95 border-t border-slate-800 px-2 py-2 flex justify-around items-center">
-        <!-- Buttons added by JavaScript -->
-    </nav>
-
-    <!-- GLOBAL MODAL / DIALOG -->
-    <div id="app-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative space-y-4">
-            <button id="modal-close-btn" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
-                <i class="fa-solid fa-xmark"></i>
+            <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-brand-teal to-brand-emerald hover:from-teal-600 hover:to-emerald-600 text-white font-bold text-sm shadow-lg shadow-brand-teal/25 transition duration-200 transform active:scale-98 flex items-center justify-center gap-2">
+              <span>Mulai Belajar Logaritma</span>
+              <i class="fa-solid fa-arrow-right"></i>
             </button>
-            <div id="modal-icon-container" class="w-12 h-12 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center text-2xl">
-                <i class="fa-solid fa-circle-info"></i>
+          </form>
+
+          <div id="existing-users-section" class="mt-8 pt-6 border-t border-slate-800 hidden">
+            <p class="text-xs font-semibold text-slate-400 mb-3 text-center">Atau pilih profil yang tersimpan di perangkat ini:</p>
+            <div id="existing-users-list" class="space-y-2 max-h-36 overflow-y-auto custom-scrollbar pr-1">
+              <!-- Dynamically filled -->
             </div>
-            <h3 id="modal-title" class="text-xl font-bold text-slate-100">Judul Modal</h3>
-            <div id="modal-body" class="text-sm text-slate-300 leading-relaxed max-h-[60vh] overflow-y-auto custom-scrollbar">
-                Konten modal di sini.
-            </div>
-            <div id="modal-footer" class="flex justify-end space-x-2 pt-2 border-t border-slate-800">
-                <button id="modal-action-btn" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 font-semibold text-sm text-white transition">
-                    Mengerti
-                </button>
-            </div>
+          </div>
         </div>
+      </section>
+
+      <!-- SCREEN 2: DASHBOARD -->
+      <section id="view-dashboard" class="hidden flex-1 flex flex-col space-y-6">
+        
+        <!-- Welcome Banner -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 bg-gradient-to-r from-slate-900 via-slate-900/80 to-brand-navy relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-96 h-96 bg-brand-teal/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-teal/20 text-brand-teal border border-brand-teal/30 text-xs font-semibold mb-3">
+                <i class="fa-solid fa-sparkles"></i> Modul Matematika JSIT TERPADU
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-black text-white">Halo, <span id="dash-greeting-name" class="text-brand-teal">Siswa</span>! 👋</h2>
+              <p class="text-slate-300 text-sm mt-1 max-w-xl">Mari temukan pola logaritma, pahami konsep dasarnya, dan lihat penerapannya dalam kehidupan serta alam semesta.</p>
+            </div>
+
+            <!-- Dashboard Mini Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div class="bg-slate-800/80 border border-slate-700/60 p-3.5 rounded-2xl">
+                <div class="text-xs text-slate-400 font-medium">Total XP</div>
+                <div id="dash-stat-xp" class="text-xl font-bold text-amber-400">0 XP</div>
+              </div>
+              <div class="bg-slate-800/80 border border-slate-700/60 p-3.5 rounded-2xl">
+                <div class="text-xs text-slate-400 font-medium">Level Logaritma</div>
+                <div id="dash-stat-level" class="text-sm font-bold text-brand-sky truncate">Penjelajah</div>
+              </div>
+              <div class="bg-slate-800/80 border border-slate-700/60 p-3.5 rounded-2xl col-span-2 sm:col-span-1">
+                <div class="text-xs text-slate-400 font-medium">Progres TERPADU</div>
+                <div id="dash-stat-progress" class="text-xl font-bold text-brand-emerald">0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Access Navigation Grid -->
+        <div>
+          <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-map text-brand-teal"></i> Alur Pembelajaran TERPADU
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="terpadu-cards-grid">
+            <!-- Dynamic TERPADU Cards rendered here -->
+          </div>
+        </div>
+
+        <!-- Secondary Features Row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div onclick="app.navigateTo('challenges')" class="glass-card glass-card-hover rounded-2xl p-5 cursor-pointer flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-puzzle-piece"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Tantangan & Soal</h4>
+              <p class="text-xs text-slate-400">Latihan bertingkat & HOTS</p>
+            </div>
+          </div>
+
+          <div onclick="app.navigateTo('progress')" class="glass-card glass-card-hover rounded-2xl p-5 cursor-pointer flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-brand-sky/20 text-brand-sky border border-brand-sky/30 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Progres Saya</h4>
+              <p class="text-xs text-slate-400">Analisis diagnostik & Laporan</p>
+            </div>
+          </div>
+
+          <div onclick="app.navigateTo('certificate')" class="glass-card glass-card-hover rounded-2xl p-5 cursor-pointer flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center text-xl">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Sertifikat Digital</h4>
+              <p class="text-xs text-slate-400">Klaim sertifikat modul</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      
+      <!-- MODULE T: TELAAH (Activate Prior Knowledge) -->
+      <section id="view-module-telaah" class="hidden flex-1 flex flex-col space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-brand-teal uppercase tracking-widest">Tahap 1 dari 7 — T (TELAAH)</span>
+            <h2 class="text-xl font-black text-white">Pertumbuhan Koloni Bakteri</h2>
+          </div>
+          <button onclick="app.navigateTo('dashboard')" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300">
+            <i class="fa-solid fa-xmark mr-1"></i> Dashboard
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Interactive Bacteria Growth Visualizer -->
+          <div class="glass-card rounded-3xl p-6 border border-slate-800 flex flex-col items-center justify-center text-center relative overflow-hidden">
+            <h3 class="text-sm font-bold text-slate-300 mb-4">Visualisasi Penggandaan Bakteri</h3>
+            
+            <div id="bacteria-container" class="w-full h-48 bg-slate-900/90 rounded-2xl border border-slate-800 p-4 flex flex-wrap items-center justify-center gap-3 overflow-y-auto custom-scrollbar">
+              <!-- Bacteria dots generated dynamically -->
+            </div>
+
+            <div class="mt-6 flex items-center gap-4">
+              <div class="text-left">
+                <span class="text-xs text-slate-400 block">Jumlah Bakteri saat ini:</span>
+                <span id="bacteria-count-display" class="text-2xl font-black text-brand-emerald">1</span>
+              </div>
+              <button onclick="app.telaahMultiplyBacteria()" class="bg-brand-teal hover:bg-teal-600 text-white font-bold px-4 py-2.5 rounded-xl text-xs shadow-md transition flex items-center gap-2">
+                <i class="fa-solid fa-vial"></i> Gandakan (×2)
+              </button>
+              <button onclick="app.telaahResetBacteria()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold px-3 py-2.5 rounded-xl text-xs transition">
+                <i class="fa-solid fa-rotate-right"></i> Reset
+              </button>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">Pola: $1 \rightarrow 2 \rightarrow 4 \rightarrow 8 \rightarrow 16 \rightarrow 32 \rightarrow \dots$</p>
+          </div>
+
+          <!-- Interactive Inquiry Questioning -->
+          <div class="glass-card rounded-3xl p-6 border border-slate-800 flex flex-col justify-between">
+            <div>
+              <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700/60 mb-6">
+                <p class="text-sm text-slate-200 leading-relaxed" id="telaah-question-text">
+                  "Jika jumlah bakteri berkembang biak dari 1 menjadi <strong>32</strong>, berapa kali proses penggandaan (pangkat dari 2) telah terjadi?"
+                </p>
+              </div>
+
+              <div id="telaah-options" class="space-y-3">
+                <!-- Dynamic options generated by JS -->
+              </div>
+            </div>
+
+            <div id="telaah-feedback" class="mt-6 p-4 rounded-2xl hidden">
+              <!-- Feedback dynamically inserted -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODULE E: EKSPLORASI (Interactive Simulator & Grapher) -->
+      <section id="view-module-eksplorasi" class="hidden flex-1 flex flex-col space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-brand-sky uppercase tracking-widest">Tahap 2 dari 7 — E (EKSPLORASI)</span>
+            <h2 class="text-xl font-black text-white">Simulator Pangkat $\leftrightarrow$ Logaritma & Grafik Fungsi</h2>
+          </div>
+          <button onclick="app.navigateTo('dashboard')" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300">
+            <i class="fa-solid fa-xmark mr-1"></i> Dashboard
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Simulator 1: Exponent to Logarithm Transformation -->
+          <div class="glass-card rounded-3xl p-6 border border-slate-800 flex flex-col space-y-6">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-brand-sky"></i> Transformasi Bentuk
+              </h3>
+              <span class="text-xs bg-brand-sky/20 text-brand-sky px-2.5 py-1 rounded-full font-semibold">Interactive</span>
+            </div>
+
+            <!-- Controls -->
+            <div class="space-y-4 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1">
+                  <span>Basis ($a$): <strong id="sim-base-val" class="text-brand-sky">2</strong></span>
+                  <span class="text-slate-500">Syarat: $a > 0, a \neq 1$</span>
+                </div>
+                <input type="range" id="sim-base-slider" min="2" max="10" value="2" class="w-full accent-brand-sky cursor-pointer" oninput="app.updateEksplorasiSimulator()">
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1">
+                  <span>Pangkat ($b$): <strong id="sim-exp-val" class="text-amber-400">5</strong></span>
+                  <span class="text-slate-500">Eksponen</span>
+                </div>
+                <input type="range" id="sim-exp-slider" min="0" max="8" value="5" class="w-full accent-amber-400 cursor-pointer" oninput="app.updateEksplorasiSimulator()">
+              </div>
+            </div>
+
+            <!-- Dual Equation Box -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 text-center">
+                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Bentuk Eksponen</span>
+                <div id="sim-exp-equation" class="text-2xl font-black text-amber-400">2⁵ = 32</div>
+                <div id="sim-exp-breakdown" class="text-xs text-slate-400 mt-2">2 × 2 × 2 × 2 × 2 = 32</div>
+              </div>
+
+              <div class="bg-slate-900 p-5 rounded-2xl border border-brand-teal/40 text-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-brand-teal text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-bl">Invers</div>
+                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Bentuk Logaritma</span>
+                <div id="sim-log-equation" class="text-2xl font-black text-brand-teal">log₂ 32 = 5</div>
+                <div id="sim-log-breakdown" class="text-xs text-slate-400 mt-2">Pangkat dari 2 untuk dapat 32 adalah 5</div>
+              </div>
+            </div>
+
+            <!-- Guided Inquiry Question -->
+            <div class="bg-slate-800/60 p-4 rounded-2xl border border-slate-700/60">
+              <p class="text-xs text-slate-300 font-semibold mb-2">💡 Pertanyaan Eksplorasi:</p>
+              <p class="text-xs text-slate-400 mb-3">Berdasarkan perubahan slider di atas, apa yang sebenarnya dicari oleh hasil operasi logaritma?</p>
+              <div class="grid grid-cols-1 gap-2">
+                <button onclick="app.checkEksplorasiInquiry(this, false)" class="text-left text-xs bg-slate-900 hover:bg-slate-800 border border-slate-700 p-2.5 rounded-xl transition">A. Bilangan pokok (Basis)</button>
+                <button onclick="app.checkEksplorasiInquiry(this, true)" class="text-left text-xs bg-slate-900 hover:bg-slate-800 border border-slate-700 p-2.5 rounded-xl transition">B. Pangkat (Eksponen)</button>
+                <button onclick="app.checkEksplorasiInquiry(this, false)" class="text-left text-xs bg-slate-900 hover:bg-slate-800 border border-slate-700 p-2.5 rounded-xl transition">C. Hasil perkalian akhir</button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Simulator 2: Interactive Function Grapher y = log_a(x) -->
+          <div class="glass-card rounded-3xl p-6 border border-slate-800 flex flex-col space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-chart-line text-brand-emerald"></i> Grafik Fungsi $y = \log_a(x)$
+              </h3>
+              <div class="flex items-center gap-2">
+                <label class="text-xs text-slate-400 font-medium">Basis $a$:</label>
+                <select id="graph-base-select" onchange="app.renderLogGraph()" class="bg-slate-900 border border-slate-700 text-xs text-brand-emerald font-bold rounded-lg px-2 py-1">
+                  <option value="2">a = 2</option>
+                  <option value="3">a = 3</option>
+                  <option value="5">a = 5</option>
+                  <option value="10">a = 10</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- SVG Graph Canvas -->
+            <div class="w-full h-64 bg-slate-900/90 rounded-2xl border border-slate-800 relative p-2 flex items-center justify-center">
+              <svg id="log-graph-svg" class="w-full h-full" viewBox="0 0 300 200">
+                <!-- Dynamically rendered SVG paths -->
+              </svg>
+            </div>
+
+            <!-- Graph Properties Info -->
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
+                <span class="text-slate-400 block font-semibold mb-0.5">Domain ($x$):</span>
+                <span class="text-slate-200 font-bold">$x > 0$ (Real Positif)</span>
+              </div>
+              <div class="bg-slate-900 p-3 rounded-xl border border-slate-800">
+                <span class="text-slate-400 block font-semibold mb-0.5">Titik Potong $x$:</span>
+                <span class="text-slate-200 font-bold">$(1, 0)$ karena $\log_a 1 = 0$</span>
+              </div>
+            </div>
+            
+            <button onclick="app.completeModuleStage('eksplorasi')" class="w-full py-3 rounded-xl bg-brand-sky hover:bg-sky-600 font-bold text-xs text-white shadow-lg transition">
+              Selesai Eksplorasi & Lanjut ke Rumuskan <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- MODULE R: RUMUSKAN (Discover Logarithm Properties) -->
+      <section id="view-module-rumuskan" class="hidden flex-1 flex flex-col space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Tahap 3 dari 7 — R (RUMUSKAN)</span>
+            <h2 class="text-xl font-black text-white">Penemuan Sifat-Sifat Logaritma</h2>
+          </div>
+          <button onclick="app.navigateTo('dashboard')" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300">
+            <i class="fa-solid fa-xmark mr-1"></i> Dashboard
+          </button>
+        </div>
+
+        <!-- Interactive Discovery Accordions/Tabs -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Navigation Sidebar Sifat -->
+          <div class="space-y-3">
+            <button onclick="app.selectRumuskanProperty(1)" id="prop-btn-1" class="w-full text-left p-4 rounded-2xl border transition flex items-center justify-between bg-brand-teal/20 border-brand-teal text-white">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-brand-teal block">Sifat 1</span>
+                <span class="font-bold text-sm">Penjumlahan (Perkalian Numerus)</span>
+              </div>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+
+            <button onclick="app.selectRumuskanProperty(2)" id="prop-btn-2" class="w-full text-left p-4 rounded-2xl border transition flex items-center justify-between bg-slate-900 border-slate-800 text-slate-400 hover:text-white">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">Sifat 2</span>
+                <span class="font-bold text-sm">Pengurangan (Pembagian Numerus)</span>
+              </div>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+
+            <button onclick="app.selectRumuskanProperty(3)" id="prop-btn-3" class="w-full text-left p-4 rounded-2xl border transition flex items-center justify-between bg-slate-900 border-slate-800 text-slate-400 hover:text-white">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">Sifat 3</span>
+                <span class="font-bold text-sm">Perpangkatan Numerus</span>
+              </div>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+
+            <button onclick="app.selectRumuskanProperty(4)" id="prop-btn-4" class="w-full text-left p-4 rounded-2xl border transition flex items-center justify-between bg-slate-900 border-slate-800 text-slate-400 hover:text-white">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">Sifat 4</span>
+                <span class="font-bold text-sm">Perubahan Basis Logaritma</span>
+              </div>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Dynamic Active Property Panel -->
+          <div class="lg:col-span-2 glass-card rounded-3xl p-6 border border-slate-800 flex flex-col justify-between" id="rumuskan-active-panel">
+            <!-- Dynamically rendered property panel -->
+          </div>
+        </div>
+      </section>
+
+      
+      <!-- MODULE P: PRESENTASIKAN (Reasoning & Logical Flow) -->
+      <section id="view-module-presentasikan" class="hidden flex-1 flex flex-col space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Tahap 4 dari 7 — P (PRESENTASIKAN)</span>
+            <h2 class="text-xl font-black text-white">Susun Langkah Penalaran</h2>
+          </div>
+          <button onclick="app.navigateTo('dashboard')" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300">
+            <i class="fa-solid fa-xmark mr-1"></i> Dashboard
+          </button>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 border border-slate-800 max-w-3xl mx-auto w-full space-y-6">
+          <div class="bg-slate-900/90 p-4 rounded-2xl border border-slate-800">
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider block mb-1">Tugas Penalaran:</span>
+            <p class="text-sm text-slate-200">
+              Selesaikan persamaan $\log_2 32 = ?$ dengan memilih dan menyusun alur logika penyelesaian yang benar di bawah ini!
+            </p>
+          </div>
+
+          <!-- Step Builder -->
+          <div class="space-y-4">
+            <!-- Step 1 Selection -->
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-2">
+              <span class="text-xs font-bold text-slate-400 block">Langkah 1: Identifikasi & Transformasi ke Eksponen</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="pres-step1-options">
+                <!-- Generated dynamically -->
+              </div>
+            </div>
+
+            <!-- Step 2 Selection -->
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-2">
+              <span class="text-xs font-bold text-slate-400 block">Langkah 2: Menentukan Nilai Pangkat</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="pres-step2-options">
+                <!-- Generated dynamically -->
+              </div>
+            </div>
+
+            <!-- Step 3 Selection -->
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-2">
+              <span class="text-xs font-bold text-slate-400 block">Langkah 3: Kesimpulan Logis</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="pres-step3-options">
+                <!-- Generated dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <div id="pres-result-box" class="p-4 rounded-2xl hidden text-center"></div>
+
+          <button onclick="app.verifyPresentasikanLogic()" class="w-full py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold text-sm text-white shadow-lg transition">
+            Verifikasi Alur Pemikiran <i class="fa-solid fa-check-double ml-2"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- MODULE A: APLIKASIKAN (Multi-level Practice & HOTS) -->
+      <section id="view-module-aplikasikan" class="hidden flex-1 flex flex-col space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-brand-emerald uppercase tracking-widest">Tahap 5 dari 7 — A (APLIKASIKAN)</span>
+            <h2 class="text-xl font-black text-white">Latihan Bertingkat & Analisis HOTS</h2>
+          </div>
+          <button onclick="app.navigateTo('dashboard')" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300">
+            <i class="fa-solid fa-xmark mr-1"></i> Dashboard
+          </button>
+        </div>
+
+        <!-- Level Selector Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
+          <button onclick="app.loadAplikasikanLevel(1)" id="app-lvl-btn-1" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-brand-emerald text-slate-950">Level 1: Konsep Dasar</button>
+          <button onclick="app.loadAplikasikanLevel(2)" id="app-lvl-btn-2" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 text-slate-400 hover:text-white">Level 2: Sifat Logaritma</button>
+          <button onclick="app.loadAplikasikanLevel(3)" id="app-lvl-btn-3" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 text-slate-400 hover:text-white">Level 3: Persamaan</button>
+          <button onclick="app.loadAplikasikanLevel(4)" id="app-lvl-btn-4" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 text-slate-400 hover:text-white">Level 4: HOTS Analisis Kesalahan</button>
+        </div>
+
+        <!-- Interactive Question Card -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 max-w-3xl mx-auto w-full space-y-6" id="aplikasikan-card">
+          <!-- Dynamically filled question content -->
+        </div>
+      </section>
+
+      <!-- MODULE D: DUNIAWI (Real World Applications) -->
+      <section id="view-module-duniawi" class="hidden flex-1 flex flex-col space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Tahap 6 dari 7 — D (DUNIAWI)</span>
+            <h2 class="text-xl font-black text-white">Logaritma Dalam Kehidupan Nyata</h2>
+          </div>
+          <button onclick="app.navigateTo('dashboard')" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300">
+            <i class="fa-solid fa-xmark mr-1"></i> Dashboard
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Real-world Application 1: pH Scale Simulator -->
+          <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-flask"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-white text-base">Skala pH Asam & Basa</h3>
+                <p class="text-xs text-slate-400">$pH = -\log_{10}[H^+]$</p>
+              </div>
+            </div>
+
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-3">
+              <div class="flex justify-between text-xs text-slate-300">
+                <span>Konsentrasi Ion $[H^+]$: <strong id="ph-h-val" class="text-amber-400">10⁻³ M</strong></span>
+                <span>Nilai pH: <strong id="ph-val-display" class="text-brand-emerald text-sm font-bold">3.0 (Asam)</strong></span>
+              </div>
+              <input type="range" id="ph-slider" min="1" max="14" value="3" class="w-full accent-amber-400 cursor-pointer" oninput="app.updatePhSimulator()">
+              
+              <div id="ph-substance-card" class="bg-slate-800 p-3 rounded-xl flex items-center gap-3">
+                <span class="text-2xl">🍋</span>
+                <div>
+                  <span id="ph-substance-name" class="font-bold text-xs text-white block">Jus Lemon</span>
+                  <span id="ph-substance-desc" class="text-[11px] text-slate-400">Tingkat keasaman tinggi dengan konsentrasi ion hidrogen $10^{-3}$ M.</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400">
+              💡 <strong>Mengapa Logaritma?</strong> Konsentrasi ion $H^+$ memiliki rentang sangat raksasa ($1$ hingga $10^{-14}$). Skala logaritmik menyederhanakannya menjadi angka ringkas 0 - 14.
+            </p>
+          </div>
+
+          <!-- Real-world Application 2: Sound Decibel Scale -->
+          <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-sky/20 text-brand-sky flex items-center justify-center text-lg">
+                <i class="fa-solid fa-volume-high"></i>
+              </div>
+              <div>
+                <h3 class="font-bold text-white text-base">Intensitas Suara (Desibel)</h3>
+                <p class="text-xs text-slate-400">$\beta = 10 \cdot \log_{10}\left(\frac{I}{I_0}\right)$ dB</p>
+              </div>
+            </div>
+
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-3">
+              <div class="flex justify-between text-xs text-slate-300">
+                <span>Tingkat Desibel ($\beta$): <strong id="db-val-display" class="text-brand-sky text-sm font-bold">60 dB</strong></span>
+              </div>
+              <input type="range" id="db-slider" min="0" max="140" step="20" value="60" class="w-full accent-brand-sky cursor-pointer" oninput="app.updateDbSimulator()">
+              
+              <div id="db-sound-card" class="bg-slate-800 p-3 rounded-xl flex items-center gap-3">
+                <span class="text-2xl">🗣️</span>
+                <div>
+                  <span id="db-sound-name" class="font-bold text-xs text-white block">Percakapan Biasa</span>
+                  <span id="db-sound-desc" class="text-[11px] text-slate-400">Intensitas suara $10^6$ kali lipat dibanding ambang pendengaran terkecil ($I_0$).</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400">
+              💡 Telinga manusia dapat mendengar suara dari $10^{-12} \text{ W/m}^2$ hingga $10 \text{ W/m}^2$. Skala logaritmik desibel menjaga pengukuran tetap ramah manusia.
+            </p>
+          </div>
+
+        </div>
+
+        <button onclick="app.completeModuleStage('duniawi')" class="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-600 font-bold text-sm text-slate-950 shadow-lg transition">
+          Selesai Modul Duniawi & Lanjut ke Refleksi Ukhrowi <i class="fa-solid fa-arrow-right ml-1"></i>
+        </button>
+      </section>
+
+      <!-- MODULE U: UKHROWI (Spiritual Connection & Gratitude Journal) -->
+      <section id="view-module-ukhrowi" class="hidden flex-1 flex flex-col space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold text-brand-emerald uppercase tracking-widest">Tahap 7 dari 7 — U (UKHROWI)</span>
+            <h2 class="text-xl font-black text-white">Refleksi Keteraturan & Nilai Keislaman</h2>
+          </div>
+          <button onclick="app.navigateTo('dashboard')" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300">
+            <i class="fa-solid fa-xmark mr-1"></i> Dashboard
+          </button>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 max-w-3xl mx-auto w-full space-y-6">
+          <div class="text-center space-y-2">
+            <div class="inline-flex p-3 rounded-2xl bg-brand-emerald/20 text-brand-emerald text-2xl mb-2">
+              <i class="fa-solid fa-hands-praying"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white">Keteraturan Matematika & Hikmah Kehidupan</h3>
+            <p class="text-xs text-slate-300 leading-relaxed max-w-lg mx-auto">
+              "Dalam belajar logaritma, kita menemukan bahwa setiap hasil perpangkatan raksasa dapat ditelusuri kembali ke basis dan pangkat asalnya dengan ketelitian. Begitu pula di alam semesta, tidak ada keteraturan yang tercipta secara kebetulan."
+            </p>
+          </div>
+
+          <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
+            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Refleksi Karakter Siswa:</h4>
+            
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 cursor-pointer hover:bg-slate-800 transition">
+                <input type="checkbox" checked class="w-4 h-4 accent-brand-emerald rounded">
+                <span class="text-xs text-slate-200"><strong>Ketelitian:</strong> Memeriksa syarat basis ($a > 0, a \neq 1$) melatih kehati-hatian dalam bertindak.</span>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 cursor-pointer hover:bg-slate-800 transition">
+                <input type="checkbox" checked class="w-4 h-4 accent-brand-emerald rounded">
+                <span class="text-xs text-slate-200"><strong>Kesabaran:</strong> Menyelesaikan persoalan bertahap tanpa terburu-buru melihat jawaban akhir.</span>
+              </label>
+
+              <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 cursor-pointer hover:bg-slate-800 transition">
+                <input type="checkbox" checked class="w-4 h-4 accent-brand-emerald rounded">
+                <span class="text-xs text-slate-200"><strong>Rasa Syukur:</strong> Mengagumi keteraturan pola matematik ciptaan Allah di alam nyata.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Gratitude Journal Input -->
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Jurnal Syukur Hari Ini</label>
+            <textarea id="ukhrowi-gratitude-input" rows="3" placeholder="Tuliskan satu hal yang kamu syukuri dari proses belajar matematika hari ini..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-brand-emerald custom-scrollbar"></textarea>
+          </div>
+
+          <button onclick="app.submitUkhrowiReflection()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-emerald to-brand-teal hover:from-emerald-600 hover:to-teal-600 font-bold text-sm text-white shadow-lg transition">
+            Simpan Refleksi & Raih Badge Pembelajar TERPADU ✨
+          </button>
+        </div>
+      </section>
+
+      
+      <!-- VIEW: PROGRESS & DIAGNOSTIC REPORT -->
+      <section id="view-progress" class="hidden flex-1 flex flex-col space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-black text-white">Analisis Progres & Diagnostik Belajar</h2>
+            <p class="text-xs text-slate-400">Laporan capaian konsep logaritma kamu</p>
+          </div>
+          <button onclick="app.navigateTo('dashboard')" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300">
+            <i class="fa-solid fa-xmark mr-1"></i> Dashboard
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Strengths & Weaknesses Card -->
+          <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-brain text-brand-sky"></i> Evaluasi Penguasaan Konsep
+            </h3>
+            
+            <div class="space-y-3">
+              <div>
+                <span class="text-xs font-bold text-brand-emerald block mb-1">✓ Kekuatan Kamu:</span>
+                <ul id="diag-strengths" class="text-xs text-slate-300 space-y-1 list-disc pl-5">
+                  <!-- Dynamic -->
+                </ul>
+              </div>
+
+              <div class="pt-2 border-t border-slate-800">
+                <span class="text-xs font-bold text-amber-400 block mb-1">○ Perlu Ditingkatkan:</span>
+                <ul id="diag-weaknesses" class="text-xs text-slate-300 space-y-1 list-disc pl-5">
+                  <!-- Dynamic -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unlocked Badges Showcase -->
+          <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-award text-amber-400"></i> Lencana Pencapaian (Badges)
+            </h3>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="badges-container">
+              <!-- Dynamically rendered badge icons -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: DIGITAL CERTIFICATE GENERATOR -->
+      <section id="view-certificate" class="hidden flex-1 flex flex-col space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border border-slate-800 flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-black text-white">Sertifikat Digital</h2>
+            <p class="text-xs text-slate-400">Bukti kelulusan modul Logaritma TERPADU</p>
+          </div>
+          <button onclick="app.navigateTo('dashboard')" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300">
+            <i class="fa-solid fa-xmark mr-1"></i> Dashboard
+          </button>
+        </div>
+
+        <div id="certificate-wrapper" class="glass-card rounded-3xl p-8 border-2 border-amber-500/40 max-w-3xl mx-auto w-full text-center relative overflow-hidden bg-slate-900">
+          <div class="border-4 border-double border-amber-500/30 p-8 rounded-2xl relative z-10 space-y-6">
+            <div class="inline-flex w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 items-center justify-center text-3xl mb-2">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            
+            <div>
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-widest block">Sertifikat Penyelesaian Modul</span>
+              <h1 class="text-2xl sm:text-3xl font-black text-white mt-1">MATEMATIKA LOGARITMA TERPADU</h1>
+            </div>
+
+            <p class="text-xs text-slate-400">Diberikan secara resmi kepada siswa:</p>
+            
+            <div class="py-2 border-b border-slate-700 max-w-md mx-auto">
+              <h2 id="cert-student-name" class="text-2xl font-extrabold text-brand-teal">Nama Siswa</h2>
+              <span id="cert-student-class" class="text-xs text-slate-400">Kelas X SMA/MA</span>
+            </div>
+
+            <p class="text-xs text-slate-300 max-w-lg mx-auto leading-relaxed">
+              Telah menyelesaikan seluruh rangkaian 7 tahap pembelajaran TERPADU (Telaah, Eksplorasi, Rumuskan, Presentasikan, Aplikasikan, Duniawi, Ukhrowi) dengan predikat sangat baik.
+            </p>
+
+            <div class="pt-4 flex justify-between items-end border-t border-slate-800 text-left text-[11px] text-slate-400">
+              <div>
+                <span class="block text-slate-500">Tanggal Penyelesaian:</span>
+                <span id="cert-date" class="font-bold text-slate-300">18 Agustus 2026</span>
+              </div>
+              <div class="text-right">
+                <span class="block text-slate-500">Total Poin Diperoleh:</span>
+                <span id="cert-xp" class="font-bold text-amber-400">350 XP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button onclick="window.print()" class="px-6 py-3 rounded-xl bg-brand-teal hover:bg-teal-600 font-bold text-xs text-white shadow-lg transition inline-flex items-center gap-2">
+            <i class="fa-solid fa-print"></i> Cetak / Simpan Sertifikat
+          </button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL: SWITCH USER / MULTI-USER MANAGEMENT -->
+  <div id="modal-user-switch" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-card rounded-3xl p-6 border border-slate-800 w-full max-w-md space-y-4">
+      <div class="flex justify-between items-center">
+        <h3 class="font-bold text-white text-base">Ganti Profil Siswa</h3>
+        <button onclick="app.closeUserSwitchModal()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div id="modal-user-list" class="space-y-2 max-h-60 overflow-y-auto custom-scrollbar">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <button onclick="app.logoutToWelcome()" class="w-full py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition">
+        + Tambah Siswa Baru
+      </button>
     </div>
+  </div>
 
-    <script>
-        // APP STATE MANAGEMENT
-        const APP_STATE = {
-            user: {
-                id: null,
-                name: '',
-                class: '',
-                totalXP: 0,
-                level: 1,
-                levelTitle: 'Math Explorer',
-                badges: [],
-                scores: {
-                    concept: 0,
-                    process: 0,
-                    reasoning: 0,
-                    accuracy: 0,
-                    application: 0
-                },
-                errorHistory: [],
-                completedZones: {
-                    telaah: false,
-                    eksplorasi: false,
-                    rumuskan: false,
-                    presentasikan: false,
-                    aplikasikan: false,
-                    duniawi: false,
-                    ukhrowi: false,
-                    finalMission: false
-                }
-            },
-            currentZone: 'welcome'
-        };
+  <script>
+    
+    // BADGES METADATA DEFINITION
+    const BADGES_MASTER = [
+      { id: 'b_telaah', name: '🧭 Penjelajah Konsep', desc: 'Menyelesaikan modul Telaah & Eksplorasi', icon: 'fa-compass' },
+      { id: 'b_rumus', name: '🔎 Pemburu Pola', desc: 'Menemukan sifat-sifat dasar logaritma', icon: 'fa-magnifying-glass' },
+      { id: 'b_aplikasi', name: '🧠 Pemecah Masalah', desc: 'Menyelesaikan latihan & soal HOTS', icon: 'fa-brain' },
+      { id: 'b_duniawi', name: '🌍 Matematikawan Dunia', desc: 'Memahami penerapan pH dan desibel', icon: 'fa-earth-americas' },
+      { id: 'b_terpadu', name: '✨ Pembelajar TERPADU', desc: 'Menyelesaikan seluruh modul & refleksi', icon: 'fa-certificate' }
+    ];
 
-        // JSIT TERPADU ZONES DEFINITION
-        const ZONES = [
-            { id: 'dashboard', name: 'Dashboard', icon: 'fa-house', color: 'text-sky-400' },
-            { id: 'telaah', name: 'T — Telaah', icon: 'fa-magnifying-glass', color: 'text-amber-400', xp: 20 },
-            { id: 'eksplorasi', name: 'E — Eksplorasi', icon: 'fa-flask', color: 'text-emerald-400', xp: 30 },
-            { id: 'rumuskan', name: 'R — Rumuskan', icon: 'fa-brain', color: 'text-purple-400', xp: 50 },
-            { id: 'presentasikan', name: 'P — Presentasikan', icon: 'fa-microphone', color: 'text-cyan-400', xp: 40 },
-            { id: 'aplikasikan', name: 'A — Aplikasikan', icon: 'fa-rocket', color: 'text-indigo-400', xp: 60 },
-            { id: 'duniawi', name: 'D — Duniawi', icon: 'fa-earth-americas', color: 'text-teal-400', xp: 50 },
-            { id: 'ukhrowi', name: 'U — Ukhrowi', icon: 'fa-hands-praying', color: 'text-rose-400', xp: 30 },
-            { id: 'finalMission', name: 'Final Mission', icon: 'fa-trophy', color: 'text-gold', xp: 100 },
-            { id: 'report', name: 'Laporan Belajar', icon: 'fa-chart-pie', color: 'text-slate-300' }
+    // APPLICATION LOGIC ARCHITECTURE
+    class LogaritmaApp {
+      constructor() {
+        this.studentsStoreKey = 'logaritma_students_db_v1';
+        this.activeStudentIdKey = 'logaritma_active_student_id';
+        this.currentStudent = null;
+        this.currentView = 'welcome';
+        
+        // Telaah module state
+        this.bacteriaCount = 1;
+
+        // Rumuskan active property state
+        this.activePropertyIndex = 1;
+
+        // Aplikasikan practice state
+        this.currentAppLevel = 1;
+        this.currentQuestionHintsUsed = 0;
+
+        this.init();
+      }
+
+      init() {
+        this.loadActiveStudent();
+        if (this.currentStudent) {
+          this.navigateTo('dashboard');
+        } else {
+          this.navigateTo('welcome');
+        }
+        this.renderExistingUsersList();
+      }
+
+      // STORAGE ABSTRACTION LAYER (Multi-User Persistence)
+      getAllStudents() {
+        try {
+          const raw = localStorage.getItem(this.studentsStoreKey);
+          return raw ? JSON.parse(raw) : [];
+        } catch(e) {
+          return [];
+        }
+      }
+
+      saveAllStudents(students) {
+        localStorage.setItem(this.studentsStoreKey, JSON.stringify(students));
+      }
+
+      loadActiveStudent() {
+        const activeId = localStorage.getItem(this.activeStudentIdKey);
+        if (activeId) {
+          const students = this.getAllStudents();
+          this.currentStudent = students.find(s => s.student_id === activeId) || null;
+        }
+      }
+
+      saveCurrentStudent() {
+        if (!this.currentStudent) return;
+        const students = this.getAllStudents();
+        const index = students.findIndex(s => s.student_id === this.currentStudent.student_id);
+        if (index >= 0) {
+          students[index] = this.currentStudent;
+        } else {
+          students.push(this.currentStudent);
+        }
+        this.saveAllStudents(students);
+        localStorage.setItem(this.activeStudentIdKey, this.currentStudent.student_id);
+        this.updateHeaderUI();
+      }
+
+      handleStudentLogin(e) {
+        e.preventDefault();
+        const nameInput = document.getElementById('input-name').value.trim();
+        const classInput = document.getElementById('input-class').value;
+
+        if (!nameInput) return;
+
+        const students = this.getAllStudents();
+        let existing = students.find(s => s.name.toLowerCase() === nameInput.toLowerCase() && s.class === classInput);
+
+        if (existing) {
+          this.currentStudent = existing;
+        } else {
+          // Create new student profile
+          this.currentStudent = {
+            student_id: 'std_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+            name: nameInput,
+            class: classInput,
+            total_xp: 0,
+            level: 1,
+            streak: 1,
+            completed_stages: [],
+            unlocked_badges: [],
+            activity_history: [],
+            gratitude_journal: ''
+          };
+        }
+
+        this.saveCurrentStudent();
+        this.navigateTo('dashboard');
+      }
+
+      logoutToWelcome() {
+        this.closeUserSwitchModal();
+        localStorage.removeItem(this.activeStudentIdKey);
+        this.currentStudent = null;
+        this.navigateTo('welcome');
+        this.renderExistingUsersList();
+      }
+
+      switchStudentProfile(studentId) {
+        const students = this.getAllStudents();
+        const found = students.find(s => s.student_id === studentId);
+        if (found) {
+          this.currentStudent = found;
+          this.saveCurrentStudent();
+          this.closeUserSwitchModal();
+          this.navigateTo('dashboard');
+        }
+      }
+
+      renderExistingUsersList() {
+        const students = this.getAllStudents();
+        const container = document.getElementById('existing-users-list');
+        const section = document.getElementById('existing-users-section');
+
+        if (students.length === 0) {
+          section.classList.add('hidden');
+          return;
+        }
+
+        section.classList.remove('hidden');
+        container.innerHTML = students.map(s => `
+          <button type="button" onclick="app.switchStudentProfile('${s.student_id}')" class="w-full text-left p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 flex items-center justify-between text-xs transition">
+            <div>
+              <strong class="text-white block">${s.name}</strong>
+              <span class="text-slate-400">Kelas ${s.class} • ${s.total_xp} XP</span>
+            </div>
+            <i class="fa-solid fa-chevron-right text-slate-500 text-[10px]"></i>
+          </button>
+        `).join('');
+      }
+
+      // UI NAVIGATION CONTROLLER
+      navigateTo(viewId) {
+        // List of all view IDs
+        const views = [
+          'welcome', 'dashboard', 'module-telaah', 'module-eksplorasi',
+          'module-rumuskan', 'module-presentasikan', 'module-aplikasikan',
+          'module-duniawi', 'module-ukhrowi', 'progress', 'certificate'
         ];
 
-        // BADGES CATALOG
-        const BADGES_CATALOG = {
-            'detektif': { name: 'Detektif Persamaan', icon: 'fa-magnifying-glass-chart', color: 'from-amber-500 to-orange-500' },
-            'master_eliminasi': { name: 'Master Eliminasi', icon: 'fa-wand-magic-sparkles', color: 'from-emerald-500 to-teal-500' },
-            'ahli_grafik': { name: 'Ahli Grafik', icon: 'fa-chart-line', color: 'from-blue-500 to-cyan-500' },
-            'pemecah_masalah': { name: 'Pemecah Masalah', icon: 'fa-lightbulb', color: 'from-purple-500 to-indigo-500' },
-            'math_explorer': { name: 'Math Explorer', icon: 'fa-compass', color: 'from-pink-500 to-rose-500' },
-            'duniawi_solver': { name: 'Matematika dalam Kehidupan', icon: 'fa-globe', color: 'from-teal-500 to-emerald-500' },
-            'ilmu_bermanfaat': { name: 'Ilmu yang Bermanfaat', icon: 'fa-hands-holding-heart', color: 'from-rose-500 to-red-500' }
-        };
+        views.forEach(id => {
+          const el = document.getElementById('view-' + id);
+          if (el) el.classList.add('hidden');
+        });
 
-        // Simple Web Audio API Synthesizer for gamification sounds
-        const AudioFX = {
-            ctx: null,
-            init() {
-                if (!this.ctx) {
-                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-            },
-            playTone(freq, duration, type = 'sine') {
-                try {
-                    this.init();
-                    const osc = this.ctx.createOscillator();
-                    const gain = this.ctx.createGain();
-                    osc.type = type;
-                    osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-                    gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
-                    osc.connect(gain);
-                    gain.connect(this.ctx.destination);
-                    osc.start();
-                    osc.stop(this.ctx.currentTime + duration);
-                } catch(e) {}
-            },
-            success() {
-                this.playTone(523.25, 0.1); // C5
-                setTimeout(() => this.playTone(659.25, 0.1), 100); // E5
-                setTimeout(() => this.playTone(783.99, 0.2), 200); // G5
-            },
-            error() {
-                this.playTone(220, 0.15, 'sawtooth');
-                setTimeout(() => this.playTone(180, 0.2, 'sawtooth'), 120);
-            },
-            levelUp() {
-                [440, 554.37, 659.25, 880].forEach((f, i) => {
-                    setTimeout(() => this.playTone(f, 0.15, 'triangle'), i * 100);
-                });
-            }
-        };
-
-        function saveUserState() {
-            if (APP_STATE.user.id) {
-                localStorage.setItem(`math_app_user_${APP_STATE.user.id}`, JSON.stringify(APP_STATE.user));
-                localStorage.setItem('math_app_last_user_id', APP_STATE.user.id);
-            }
+        const target = document.getElementById('view-' + viewId);
+        if (target) {
+          target.classList.remove('hidden');
+          this.currentView = viewId;
         }
 
-        function loadUserState(userId) {
-            const data = localStorage.getItem(`math_app_user_${userId}`);
-            if (data) {
-                try {
-                    APP_STATE.user = JSON.parse(data);
-                    return true;
-                } catch(e) {}
-            }
-            return false;
+        const header = document.getElementById('main-header');
+        if (viewId === 'welcome') {
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+          this.updateHeaderUI();
         }
 
-        function addXP(amount, message = '') {
-            APP_STATE.user.totalXP += amount;
+        // Trigger view-specific render logic
+        if (viewId === 'dashboard') this.renderDashboardView();
+        if (viewId === 'module-telaah') this.initTelaahModule();
+        if (viewId === 'module-eksplorasi') this.initEksplorasiModule();
+        if (viewId === 'module-rumuskan') this.renderRumuskanPropertyPanel();
+        if (viewId === 'module-presentasikan') this.initPresentasikanModule();
+        if (viewId === 'module-aplikasikan') this.loadAplikasikanLevel(1);
+        if (viewId === 'module-duniawi') { this.updatePhSimulator(); this.updateDbSimulator(); }
+        if (viewId === 'progress') this.renderProgressView();
+        if (viewId === 'certificate') this.renderCertificateView();
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      updateHeaderUI() {
+        if (!this.currentStudent) return;
+        document.getElementById('header-student-name').innerText = this.currentStudent.name;
+        document.getElementById('header-xp').innerText = `${this.currentStudent.total_xp} XP`;
+        document.getElementById('header-level').innerText = `Level ${this.calculateLevel(this.currentStudent.total_xp)}`;
+        document.getElementById('header-streak').innerText = `${this.currentStudent.streak || 1} Hari`;
+      }
+
+      calculateLevel(xp) {
+        if (xp >= 300) return 5; // Ahli Logaritma
+        if (xp >= 200) return 4; // Pemecah Masalah
+        if (xp >= 120) return 3; // Perumus
+        if (xp >= 50) return 2;  // Pengamat
+        return 1;                // Penjelajah
+      }
+
+      getLevelTitle(level) {
+        const titles = { 1: 'Penjelajah', 2: 'Pengamat', 3: 'Perumus', 4: 'Pemecah Masalah', 5: 'Ahli Logaritma' };
+        return titles[level] || 'Penjelajah';
+      }
+
+      addXP(amount, activityName) {
+        if (!this.currentStudent) return;
+        this.currentStudent.total_xp += amount;
+        this.currentStudent.activity_history.push({
+          activity: activityName,
+          xp: amount,
+          timestamp: new Date().toISOString()
+        });
+        
+        // Auto unlock badges check
+        this.checkBadgeUnlocks();
+        this.saveCurrentStudent();
+      }
+
+      checkBadgeUnlocks() {
+        const completed = this.currentStudent.completed_stages || [];
+        const badges = this.currentStudent.unlocked_badges || [];
+
+        if (completed.includes('telaah') && !badges.includes('b_telaah')) badges.push('b_telaah');
+        if (completed.includes('rumuskan') && !badges.includes('b_rumus')) badges.push('b_rumus');
+        if (completed.includes('aplikasikan') && !badges.includes('b_aplikasi')) badges.push('b_aplikasi');
+        if (completed.includes('duniawi') && !badges.includes('b_duniawi')) badges.push('b_duniawi');
+        if (completed.length >= 7 && !badges.includes('b_terpadu')) badges.push('b_terpadu');
+
+        this.currentStudent.unlocked_badges = badges;
+      }
+
+      renderDashboardView() {
+        if (!this.currentStudent) return;
+        document.getElementById('dash-greeting-name').innerText = this.currentStudent.name;
+        document.getElementById('dash-stat-xp').innerText = `${this.currentStudent.total_xp} XP`;
+        
+        const levelNum = this.calculateLevel(this.currentStudent.total_xp);
+        document.getElementById('dash-stat-level').innerText = this.getLevelTitle(levelNum);
+
+        const progressPercent = Math.round(((this.currentStudent.completed_stages || []).length / 7) * 100);
+        document.getElementById('dash-stat-progress').innerText = `${progressPercent}%`;
+
+        // Render TERPADU learning path grid
+        const stages = [
+          { id: 'telaah', letter: 'T', title: 'Telaah', desc: 'Penggandaan Bakteri', icon: 'fa-microscope', color: 'text-brand-teal border-brand-teal' },
+          { id: 'eksplorasi', letter: 'E', title: 'Eksplorasi', desc: 'Simulator & Grafik', icon: 'fa-sliders', color: 'text-brand-sky border-brand-sky' },
+          { id: 'rumuskan', letter: 'R', title: 'Rumuskan', desc: 'Sifat-sifat Logaritma', icon: 'fa-magnifying-glass', color: 'text-amber-400 border-amber-400' },
+          { id: 'presentasikan', letter: 'P', title: 'Presentasikan', desc: 'Alur Penalaran Logis', icon: 'fa-diagram-project', color: 'text-purple-400 border-purple-400' },
+          { id: 'aplikasikan', letter: 'A', title: 'Aplikasikan', desc: 'Latihan Bertingkat', icon: 'fa-pen-to-square', color: 'text-brand-emerald border-brand-emerald' },
+          { id: 'duniawi', letter: 'D', title: 'Duniawi', desc: 'pH, Desibel & Sains', icon: 'fa-globe', color: 'text-rose-400 border-rose-400' },
+          { id: 'ukhrowi', letter: 'U', title: 'Ukhrowi', desc: 'Refleksi & Rasa Syukur', icon: 'fa-hands-praying', color: 'text-teal-300 border-teal-300' }
+        ];
+
+        const grid = document.getElementById('terpadu-cards-grid');
+        grid.innerHTML = stages.map(st => {
+          const isDone = (this.currentStudent.completed_stages || []).includes(st.id);
+          return `
+            <div onclick="app.navigateTo('module-${st.id}')" class="glass-card glass-card-hover rounded-2xl p-4 border border-slate-800 cursor-pointer flex flex-col justify-between relative overflow-hidden">
+              ${isDone ? '<div class="absolute top-3 right-3 text-brand-emerald"><i class="fa-solid fa-circle-check text-base"></i></div>' : ''}
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="w-8 h-8 rounded-lg bg-slate-900 border ${st.color} flex items-center justify-center font-extrabold text-sm">${st.letter}</span>
+                  <span class="font-bold text-sm text-white">${st.title}</span>
+                </div>
+                <p class="text-xs text-slate-400">${st.desc}</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-800/80 flex justify-between items-center text-[11px] text-slate-400 font-semibold">
+                <span>${isDone ? 'Selesai' : 'Mulai Module'}</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      initTelaahModule() {
+        this.bacteriaCount = 1;
+        this.renderBacteriaDots();
+        this.renderTelaahQuestion();
+      }
+
+      telaahMultiplyBacteria() {
+        if (this.bacteriaCount < 64) {
+          this.bacteriaCount *= 2;
+          this.renderBacteriaDots();
+        }
+      }
+
+      telaahResetBacteria() {
+        this.bacteriaCount = 1;
+        this.renderBacteriaDots();
+      }
+
+      renderBacteriaDots() {
+        const container = document.getElementById('bacteria-container');
+        document.getElementById('bacteria-count-display').innerText = this.bacteriaCount;
+        
+        container.innerHTML = Array.from({ length: this.bacteriaCount }).map(() => `
+          <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-brand-emerald to-brand-teal shadow-md flex items-center justify-center text-[10px] text-slate-950 font-bold animate-bounce">
+            🦠
+          </div>
+        `).join('');
+      }
+
+      renderTelaahQuestion() {
+        const optionsContainer = document.getElementById('telaah-options');
+        const options = [
+          { text: "2 kali penggandaan", correct: false, reason: "Bukan, 2² = 4 bakteri." },
+          { text: "3 kali penggandaan", correct: false, reason: "Bukan, 2³ = 8 bakteri." },
+          { text: "4 kali penggandaan", correct: false, reason: "Bukan, 2⁴ = 16 bakteri." },
+          { text: "5 kali penggandaan", correct: true, reason: "Tepat sekali! Karena 2⁵ = 32. Angka 5 adalah PANGKAT yang kita cari!" }
+        ];
+
+        optionsContainer.innerHTML = options.map((opt, i) => `
+          <button onclick="app.answerTelaahInquiry(this, ${opt.correct}, '${opt.reason}')" class="w-full text-left p-3.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-brand-teal text-xs text-slate-200 transition font-medium">
+            ${opt.text}
+          </button>
+        `).join('');
+      }
+
+      answerTelaahInquiry(btnEl, isCorrect, reason) {
+        const fb = document.getElementById('telaah-feedback');
+        fb.classList.remove('hidden', 'bg-emerald-950/80', 'bg-rose-950/80', 'border-emerald-500', 'border-rose-500');
+        
+        if (isCorrect) {
+          fb.classList.add('bg-emerald-950/80', 'border', 'border-emerald-500', 'text-emerald-200');
+          fb.innerHTML = `
+            <div class="flex items-start gap-2 text-xs">
+              <i class="fa-solid fa-circle-check text-emerald-400 text-sm mt-0.5"></i>
+              <div>
+                <strong>Hebat!</strong> ${reason}<br>
+                <span class="text-slate-300 mt-1 block">Inilah inti Logaritma: Mencari berapa PANGKAT yang dibutuhkan dari bilangan pokok!</span>
+              </div>
+            </div>
+            <button onclick="app.completeModuleStage('telaah')" class="mt-3 w-full py-2.5 rounded-xl bg-brand-teal font-bold text-xs text-white">
+              Lanjut ke Eksplorasi <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+          `;
+          confetti({ particleCount: 30, spread: 60, origin: { y: 0.7 } });
+          this.addXP(20, 'Menyelesaikan Telaah Bakteri');
+        } else {
+          fb.classList.add('bg-rose-950/80', 'border', 'border-rose-500', 'text-rose-200');
+          fb.innerHTML = `
+            <div class="flex items-start gap-2 text-xs">
+              <i class="fa-solid fa-circle-xmark text-rose-400 text-sm mt-0.5"></i>
+              <div><strong>Hampir Benar:</strong> ${reason} Coba hitung kembali $2 \times 2 \times \dots = 32$.</div>
+            </div>
+          `;
+        }
+      }
+
+      initEksplorasiModule() {
+        this.updateEksplorasiSimulator();
+        this.renderLogGraph();
+      }
+
+      updateEksplorasiSimulator() {
+        const base = parseInt(document.getElementById('sim-base-slider').value);
+        const exp = parseInt(document.getElementById('sim-exp-slider').value);
+        const result = Math.pow(base, exp);
+
+        document.getElementById('sim-base-val').innerText = base;
+        document.getElementById('sim-exp-val').innerText = exp;
+
+        document.getElementById('sim-exp-equation').innerHTML = `${base}<sup>${exp}</sup> = ${result}`;
+        
+        let breakdown = Array(exp).fill(base).join(' × ');
+        if (exp === 0) breakdown = 'Sesuai sifat $a^0 = 1$';
+        document.getElementById('sim-exp-breakdown').innerText = breakdown + ` = ${result}`;
+
+        document.getElementById('sim-log-equation').innerHTML = `log<sub>${base}</sub> ${result} = ${exp}`;
+        document.getElementById('sim-log-breakdown').innerText = `Pangkat dari ${base} untuk menghasilkan ${result} adalah ${exp}`;
+      }
+
+      checkEksplorasiInquiry(btn, isCorrect) {
+        if (isCorrect) {
+          btn.className = "text-left text-xs bg-emerald-900/60 border border-emerald-500 p-2.5 rounded-xl font-bold text-emerald-200";
+          btn.innerHTML = "✓ Tepat! Logaritma mencari PANGKAT (Eksponen). (+10 XP)";
+          this.addXP(10, 'Inquiry Eksplorasi');
+        } else {
+          btn.className = "text-left text-xs bg-rose-900/60 border border-rose-500 p-2.5 rounded-xl font-bold text-rose-200";
+          btn.innerHTML = "× Kurang tepat. Perhatikan angka yang menjadi hasil dari logaritma.";
+        }
+      }
+
+      renderLogGraph() {
+        const svg = document.getElementById('log-graph-svg');
+        const base = parseFloat(document.getElementById('graph-base-select').value);
+
+        // Draw coordinate axes
+        let pathD = "M 30 10 L 30 180 M 30 150 L 290 150"; // Axes
+        
+        // Generate logarithmic curve points y = log_a(x)
+        let curveD = "";
+        for (let xPx = 35; xPx <= 280; xPx += 2) {
+          let xMath = (xPx - 30) / 25; // Scale: 25px = 1 unit
+          if (xMath > 0.05) {
+            let yMath = Math.log(xMath) / Math.log(base);
+            let yPx = 150 - (yMath * 30); // Scale: 30px = 1 unit
+            if (yPx >= 10 && yPx <= 190) {
+              curveD += (curveD === "" ? `M ${xPx} ${yPx}` : ` L ${xPx} ${yPx}`);
+            }
+          }
+        }
+
+        svg.innerHTML = `
+          <!-- Grid lines -->
+          <line x1="30" y1="150" x2="290" y2="150" stroke="#475569" stroke-width="1.5" />
+          <line x1="30" y1="10" x2="30" y2="180" stroke="#475569" stroke-width="1.5" />
+          
+          <!-- Key Point (1, 0) -->
+          <circle cx="55" cy="150" r="4" fill="#10B981" />
+          <text x="55" y="165" fill="#10B981" font-size="10" font-weight="bold">(1,0)</text>
+
+          <!-- Curve -->
+          <path d="${curveD}" fill="none" stroke="#0D9488" stroke-width="3" />
+        `;
+      }
+
+      selectRumuskanProperty(index) {
+        this.activePropertyIndex = index;
+        for (let i = 1; i <= 4; i++) {
+          const btn = document.getElementById(`prop-btn-${i}`);
+          if (i === index) {
+            btn.className = "w-full text-left p-4 rounded-2xl border transition flex items-center justify-between bg-brand-teal/20 border-brand-teal text-white";
+          } else {
+            btn.className = "w-full text-left p-4 rounded-2xl border transition flex items-center justify-between bg-slate-900 border-slate-800 text-slate-400 hover:text-white";
+          }
+        }
+        this.renderRumuskanPropertyPanel();
+      }
+
+      renderRumuskanPropertyPanel() {
+        const panel = document.getElementById('rumuskan-active-panel');
+        const props = [
+          {
+            title: "Sifat Perkalian Numerus",
+            formula: "log_a(M \\cdot N) = log_a M + log_a N",
+            example: "log_2(4 \\cdot 8) = log_2(32) = 5",
+            step: "log_2(4) + log_2(8) = 2 + 3 = 5",
+            why: "Karena perkalian basis sama menjumlahkan pangkatnya ($a^m \\cdot a^n = a^{m+n}$)."
+          },
+          {
+            title: "Sifat Pembagian Numerus",
+            formula: "log_a\\left(\\frac{M}{N}\\right) = log_a M - log_a N",
+            example: "log_2\\left(\\frac{32}{4}\\right) = log_2(8) = 3",
+            step: "log_2(32) - log_2(4) = 5 - 2 = 3",
+            why: "Korelasi dari pengurangan pangkat pada pembagian eksponen ($a^m / a^n = a^{m-n}$)."
+          },
+          {
+            title: "Sifat Perpangkatan Numerus",
+            formula: "log_a(M^n) = n \\cdot log_a M",
+            example: "log_2(8^2) = log_2(64) = 6",
+            step: "2 \\cdot log_2(8) = 2 \\cdot 3 = 6",
+            why: "Pangkat berulang pada eksponen mengalikan nilai pangkat ($(a^m)^n = a^{m\\cdot n}$)."
+          },
+          {
+            title: "Sifat Perubahan Basis",
+            formula: "log_a b = \\frac{log_c b}{log_c a}",
+            example: "log_4 16 = \\frac{log_2 16}{log_2 4} = \\frac{4}{2} = 2",
+            step: "Sifat ini memungkinkan perhitungan logaritma menggunakan basis umum c (seperti basis 10).",
+            why: "Mempermudah konversi basis apapun ke kalkulator berbasis 10."
+          }
+        ];
+
+        const active = props[this.activePropertyIndex - 1];
+
+        panel.innerHTML = `
+          <div class="space-y-4">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Rumus Sifat ${this.activePropertyIndex}</span>
+            <div class="bg-slate-900 p-5 rounded-2xl border border-amber-500/30 text-center">
+              <div class="text-xl sm:text-2xl font-black text-amber-400 font-mono">${active.formula}</div>
+            </div>
+
+            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-2">
+              <span class="text-xs font-bold text-slate-300 block">Contoh Pembuktian Pola:</span>
+              <p class="text-xs text-slate-300 font-mono">${active.example}</p>
+              <p class="text-xs text-brand-teal font-mono">${active.step}</p>
+            </div>
+
+            <div class="bg-brand-navy/60 p-4 rounded-2xl border border-brand-sky/30">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-brand-sky flex items-center gap-1">
+                  <i class="fa-solid fa-circle-question"></i> Fitur "Kenapa?"
+                </span>
+              </div>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">${active.why}</p>
+            </div>
+          </div>
+
+          <button onclick="app.completeModuleStage('rumuskan')" class="mt-6 w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 font-bold text-xs text-slate-950 transition">
+            Pahami Sifat Ini & Lanjut ke Presentasikan <i class="fa-solid fa-arrow-right ml-1"></i>
+          </button>
+        `;
+      }
+
+      initPresentasikanModule() {
+        const step1Opts = [
+          { text: "Ubah ke eksponen: 2<sup>x</sup> = 32", correct: true },
+          { text: "Ubah ke perkalian: 2 × 32 = x", correct: false }
+        ];
+
+        const step2Opts = [
+          { text: "Karena 2⁵ = 32, maka x = 5", correct: true },
+          { text: "Karena 2 × 16 = 32, maka x = 16", correct: false }
+        ];
+
+        const step3Opts = [
+          { text: "Kesimpulan: log₂ 32 = 5", correct: true },
+          { text: "Kesimpulan: log₂ 32 = 32", correct: false }
+        ];
+
+        this.renderPresStepOptions('pres-step1-options', step1Opts, 'step1');
+        this.renderPresStepOptions('pres-step2-options', step2Opts, 'step2');
+        this.renderPresStepOptions('pres-step3-options', step3Opts, 'step3');
+      }
+
+      renderPresStepOptions(containerId, options, stepKey) {
+        const el = document.getElementById(containerId);
+        el.innerHTML = options.map((opt, i) => `
+          <button onclick="app.selectPresStepOption(this, '${stepKey}', ${opt.correct})" class="pres-${stepKey}-btn text-left p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 transition">
+            ${opt.text}
+          </button>
+        `).join('');
+      }
+
+      selectPresStepOption(btnEl, stepKey, isCorrect) {
+        document.querySelectorAll(`.pres-${stepKey}-btn`).forEach(b => {
+          b.classList.remove('border-purple-500', 'bg-purple-950/40');
+        });
+        btnEl.classList.add('border-purple-500', 'bg-purple-950/40');
+        btnEl.dataset.correct = isCorrect;
+      }
+
+      verifyPresentasikanLogic() {
+        const sel1 = document.querySelector('.pres-step1-btn[data-correct="true"]');
+        const sel2 = document.querySelector('.pres-step2-btn[data-correct="true"]');
+        const sel3 = document.querySelector('.pres-step3-btn[data-correct="true"]');
+
+        const resultBox = document.getElementById('pres-result-box');
+        resultBox.classList.remove('hidden', 'bg-emerald-950/80', 'bg-rose-950/80');
+
+        if (sel1 && sel2 && sel3) {
+          resultBox.classList.add('bg-emerald-950/80', 'border', 'border-emerald-500', 'text-emerald-200');
+          resultBox.innerHTML = `
+            <i class="fa-solid fa-circle-check text-emerald-400 text-lg mb-1"></i>
+            <p class="text-xs font-bold">Luar biasa! Alur penalaran kamu sangat logis dan sistematis (+20 XP).</p>
+            <button onclick="app.completeModuleStage('presentasikan')" class="mt-3 px-4 py-2 rounded-xl bg-purple-600 font-bold text-xs text-white">
+              Lanjut ke Aplikasikan <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+          `;
+          this.addXP(20, 'Presentasikan Penalaran');
+        } else {
+          resultBox.classList.add('bg-rose-950/80', 'border', 'border-rose-500', 'text-rose-200');
+          resultBox.innerHTML = `<p class="text-xs">Ada langkah yang belum tepat. Periksa kembali transformasi eksponen dan kesimpulannya.</p>`;
+        }
+      }
+
+      loadAplikasikanLevel(lvl) {
+        this.currentAppLevel = lvl;
+        this.currentQuestionHintsUsed = 0;
+
+        for (let i = 1; i <= 4; i++) {
+          const btn = document.getElementById(`app-lvl-btn-${i}`);
+          if (i === lvl) {
+            btn.className = "px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-brand-emerald text-slate-950";
+          } else {
+            btn.className = "px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-slate-800 text-slate-400 hover:text-white";
+          }
+        }
+
+        const questions = {
+          1: {
+            title: "Level 1 — Konsep Dasar Logaritma",
+            q: "Hitung nilai dari $log_3 81 = ...$",
+            options: ["3", "4", "9", "27"],
+            answerIndex: 1,
+            hints: ["Ingat bentuk $3^x = 81$.", "Perkalikan 3 berulang: 3 × 3 × 3 × 3.", "3⁴ = 81, jadi hasilnya adalah 4."]
+          },
+          2: {
+            title: "Level 2 — Penerapan Sifat Perkalian",
+            q: "Sederhanakan $log_2 8 + log_2 4 = ...$",
+            options: ["log₂ 12", "5", "6", "log₂ 32"],
+            answerIndex: 1,
+            hints: ["Gunakan sifat $log_a M + log_a N = log_a(M \\cdot N)$.", "$log_2(8 \\cdot 4) = log_2(32)$.", "2⁵ = 32, jadi jawabannya 5."]
+          },
+          3: {
+            title: "Level 3 — Persamaan Logaritma",
+            q: "Tentukan nilai $x$ dari persamaan $log_2(x) = 5$",
+            options: ["10", "25", "32", "64"],
+            answerIndex: 2,
+            hints: ["Ubah persamaan logaritma ke bentuk eksponen $2^5 = x$.", "Hitung $2 \\times 2 \\times 2 \\times 2 \\times 2$.", "Hasil dari $2^5$ adalah 32."]
+          },
+          4: {
+            title: "Level 4 — HOTS Analisis Kesalahan",
+            q: "Siswa A mengerjakan $log_2(x) + log_2(4) = 5$ dan mendapatkan $x = 8$. Dimanakah letak kesalahan pemikirannya?",
+            options: [
+              "Mengubah $log_2(4x) = 5 \\rightarrow 4x = 2^5 = 32 \\rightarrow x = 8$ (Langkah ini BENAR)",
+              "Siswa A mengalikan numerus menjadi $x + 4 = 5$ sehingga $x = 1$",
+              "Siswa A mengabaikan sifat logaritma"
+            ],
+            answerIndex: 0,
+            hints: ["Uji nilai $x=8$: $log_2(8) + log_2(4) = 3 + 2 = 5$.", "Periksa apakah langkah $4x = 32$ menghasilkan $x = 8$.", "Hasil $x=8$ sebenarnya sudah benar!"]
+          }
+        };
+
+        const current = questions[lvl];
+        const card = document.getElementById('aplikasikan-card');
+
+        card.innerHTML = `
+          <div>
+            <span class="text-xs font-bold text-brand-emerald uppercase tracking-wider block mb-1">${current.title}</span>
+            <h3 class="text-base font-extrabold text-white mb-4">${current.q}</h3>
+
+            <div class="space-y-2 mb-6">
+              ${current.options.map((opt, idx) => `
+                <button onclick="app.submitAplikasikanAnswer(${idx}, ${current.answerIndex})" class="w-full text-left p-3.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-brand-emerald text-xs text-slate-200 transition font-medium">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+
+            <!-- Hint Trigger -->
+            <div class="border-t border-slate-800 pt-4 flex items-center justify-between">
+              <button onclick="app.showAplikasikanHint()" class="text-xs text-amber-400 font-semibold hover:underline flex items-center gap-1">
+                <i class="fa-solid fa-lightbulb"></i> Minta Bantuan Hint (Sisa Hint)
+              </button>
+              <span id="hint-status" class="text-[11px] text-slate-500">Bonus XP Penuh</span>
+            </div>
             
-            // Check Level Up (Every 100 XP)
-            const newLevel = Math.floor(APP_STATE.user.totalXP / 100) + 1;
-            if (newLevel > APP_STATE.user.level) {
-                APP_STATE.user.level = newLevel;
-                const titles = ['Math Explorer', 'Equation Detective', 'Problem Solver', 'Math Strategist', 'Math Master'];
-                APP_STATE.user.levelTitle = titles[Math.min(newLevel - 1, titles.length - 1)];
-                AudioFX.levelUp();
-                showModal('🎉 LEVEL UP!', `<div class="text-center py-4">
-                    <div class="text-5xl text-gold mb-2"><i class="fa-solid fa-crown"></i></div>
-                    <p class="text-lg font-bold text-slate-100">Selamat! Kamu naik ke Level ${newLevel}</p>
-                    <p class="text-brand-400 font-semibold">${APP_STATE.user.levelTitle}</p>
-                </div>`);
-            } else {
-                AudioFX.success();
-            }
-
-            updateHeaderUI();
-            saveUserState();
-
-            if (message) {
-                showToast(`+${amount} XP: ${message}`);
-            }
-        }
-
-        function awardBadge(badgeKey) {
-            if (!APP_STATE.user.badges.includes(badgeKey)) {
-                APP_STATE.user.badges.push(badgeKey);
-                const b = BADGES_CATALOG[badgeKey];
-                saveUserState();
-                updateSidebarBadges();
-                showModal('🏆 BADGE BARU DIPEROLEH!', `<div class="text-center py-4">
-                    <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr ${b.color} flex items-center justify-center text-3xl text-white shadow-xl mb-3">
-                        <i class="fa-solid ${b.icon}"></i>
-                    </div>
-                    <p class="text-xl font-bold text-slate-100">${b.name}</p>
-                    <p class="text-xs text-slate-400 mt-1">Berhasil ditambahkan ke koleksi lencana kamu!</p>
-                </div>`);
-            }
-        }
-
-        function showToast(msg) {
-            const toast = document.createElement('div');
-            toast.className = 'fixed bottom-20 right-6 z-50 bg-brand-600 text-white font-semibold text-sm px-4 py-2.5 rounded-xl shadow-xl flex items-center space-x-2 animate-bounce';
-            toast.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>${msg}</span>`;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        function showModal(title, contentHtml, onConfirm = null) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-body').innerHTML = contentHtml;
-            const modal = document.getElementById('app-modal');
-            const confirmBtn = document.getElementById('modal-action-btn');
-
-            confirmBtn.onclick = () => {
-                modal.classList.add('hidden');
-                if (onConfirm) onConfirm();
-            };
-
-            document.getElementById('modal-close-btn').onclick = () => {
-                modal.classList.add('hidden');
-            };
-
-            modal.classList.remove('hidden');
-        }
-
-        function updateHeaderUI() {
-            document.getElementById('user-xp-display').innerText = `${APP_STATE.user.totalXP} XP`;
-            document.getElementById('user-level-display').innerText = `Lvl ${APP_STATE.user.level} - ${APP_STATE.user.levelTitle}`;
-            document.getElementById('user-name-display').innerText = APP_STATE.user.name || 'Siswa';
-            document.getElementById('user-class-display').innerText = `Kelas ${APP_STATE.user.class}` || 'SMA';
-            document.getElementById('user-avatar-initial').innerText = (APP_STATE.user.name || 'S').charAt(0).toUpperCase();
-
-            // Progress bar
-            const completedCount = Object.values(APP_STATE.user.completedZones).filter(Boolean).length;
-            const totalZones = Object.keys(APP_STATE.user.completedZones).length;
-            const percent = Math.round((completedCount / totalZones) * 100);
-
-            document.getElementById('sidebar-progress-percent').innerText = `${percent}%`;
-            document.getElementById('sidebar-progress-bar').style.width = `${percent}%`;
-        }
-
-        function updateSidebarBadges() {
-            const container = document.getElementById('sidebar-badges-container');
-            if (APP_STATE.user.badges.length === 0) {
-                container.innerHTML = `<span class="text-xs text-slate-500 italic">Belum ada badge</span>`;
-                return;
-            }
-            container.innerHTML = APP_STATE.user.badges.map(key => {
-                const b = BADGES_CATALOG[key];
-                if (!b) return '';
-                return `<div title="${b.name}" class="w-8 h-8 rounded-lg bg-gradient-to-tr ${b.color} flex items-center justify-center text-xs text-white shadow">
-                    <i class="fa-solid ${b.icon}"></i>
-                </div>`;
-            }).join('');
-        }
-
-        function renderNavigation() {
-            const desktopNav = document.getElementById('desktop-nav-links');
-            const mobileNav = document.getElementById('mobile-nav');
-
-            desktopNav.innerHTML = '';
-            mobileNav.innerHTML = '';
-
-            ZONES.forEach(zone => {
-                const isActive = APP_STATE.currentZone === zone.id;
-                const isCompleted = APP_STATE.user.completedZones[zone.id];
-
-                // Desktop link
-                const dLink = document.createElement('button');
-                dLink.className = `w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-medium text-xs transition ${
-                    isActive ? 'bg-brand-600 text-white font-bold shadow-lg shadow-brand-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
-                }`;
-                dLink.onclick = () => navigateToZone(zone.id);
-                dLink.innerHTML = `
-                    <div class="flex items-center space-x-3">
-                        <i class="fa-solid ${zone.icon} ${isActive ? 'text-white' : zone.color}"></i>
-                        <span>${zone.name}</span>
-                    </div>
-                    ${isCompleted ? '<i class="fa-solid fa-circle-check text-emeraldCustom text-xs"></i>' : ''}
-                `;
-                desktopNav.appendChild(dLink);
-
-                // Mobile link (select primary 5 for bottom bar)
-                if (['dashboard', 'telaah', 'eksplorasi', 'aplikasikan', 'report'].includes(zone.id)) {
-                    const mBtn = document.createElement('button');
-                    mBtn.className = `flex flex-col items-center py-1 px-2 rounded-lg text-[10px] ${
-                        isActive ? 'text-brand-400 font-bold' : 'text-slate-400'
-                    }`;
-                    mBtn.onclick = () => navigateToZone(zone.id);
-                    mBtn.innerHTML = `
-                        <i class="fa-solid ${zone.icon} text-base mb-0.5"></i>
-                        <span>${zone.name.split(' ')[0]}</span>
-                    `;
-                    mobileNav.appendChild(mBtn);
-                }
-            });
-        }
-
-        function navigateToZone(zoneId) {
-            APP_STATE.currentZone = zoneId;
-            renderNavigation();
-
-            const container = document.getElementById('main-screen-container');
-            container.scrollTop = 0;
-
-            switch(zoneId) {
-                case 'welcome':
-                    renderWelcomeScreen();
-                    break;
-                case 'dashboard':
-                    renderDashboardScreen();
-                    break;
-                case 'telaah':
-                    renderTelaahScreen();
-                    break;
-                case 'eksplorasi':
-                    renderEksplorasiScreen();
-                    break;
-                case 'rumuskan':
-                    renderRumuskanScreen();
-                    break;
-                case 'presentasikan':
-                    renderPresentasikanScreen();
-                    break;
-                case 'aplikasikan':
-                    renderAplikasikanScreen();
-                    break;
-                case 'duniawi':
-                    renderDuniawiScreen();
-                    break;
-                case 'ukhrowi':
-                    renderUkhrowiScreen();
-                    break;
-                case 'finalMission':
-                    renderFinalMissionScreen();
-                    break;
-                case 'report':
-                    renderReportScreen();
-                    break;
-                default:
-                    renderDashboardScreen();
-            }
-        }
-
-        function renderWelcomeScreen() {
-            document.getElementById('main-header').classList.add('hidden');
-            document.getElementById('mobile-nav').classList.add('hidden');
-
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="min-h-full flex items-center justify-center p-4">
-                <div class="max-w-md w-full glass-panel p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6 text-center">
-                    <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-brand-600 to-cyan-400 flex items-center justify-center text-4xl text-white shadow-xl glow-active">
-                        <i class="fa-solid fa-square-root-variable"></i>
-                    </div>
-
-                    <div>
-                        <h2 class="text-2xl font-extrabold text-white tracking-tight">Selamat Datang di</h2>
-                        <h1 class="text-3xl font-black bg-gradient-to-r from-brand-400 to-cyan-300 bg-clip-text text-transparent">Math Adventure</h1>
-                        <p class="text-xs text-slate-400 mt-2">Sistem Persamaan Linear (SPLDV) — JSIT TERPADU</p>
-                    </div>
-
-                    <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 text-left space-y-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
-                            <input type="text" id="input-student-name" placeholder="Masukkan nama kamu..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Pilih Kelas</label>
-                            <select id="input-student-class" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition">
-                                <option value="X-A">Kelas X-A</option>
-                                <option value="X-B">Kelas X-B</option>
-                                <option value="XI-A">Kelas XI-A</option>
-                                <option value="XI-B">Kelas XI-B</option>
-                                <option value="XII-A">Kelas XII-A</option>
-                                <option value="XII-B">Kelas XII-B</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button id="btn-start-adventure" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-600 to-cyan-500 hover:from-brand-500 hover:to-cyan-400 font-bold text-white text-base shadow-lg shadow-brand-500/25 transition transform active:scale-95 flex items-center justify-center space-x-2">
-                        <span>MULAI PETUALANGAN</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-
-                    <p class="text-[11px] text-slate-500 italic">"Temukan. Pahami. Jelaskan. Terapkan."</p>
-                </div>
-            </div>`;
-
-            document.getElementById('btn-start-adventure').onclick = () => {
-                const name = document.getElementById('input-student-name').value.trim();
-                const studentClass = document.getElementById('input-student-class').value;
-
-                if (!name) {
-                    showModal('Peringatan', 'Silakan masukkan nama kamu terlebih dahulu untuk memulai!');
-                    return;
-                }
-
-                // Generate Unique Student ID (Combination of Name + Class + Timestamp Hash)
-                const uniqueId = `${name.toLowerCase().replace(/\s+/g, '_')}_${studentClass}_${Date.now().toString(36)}`;
-                
-                // Initialize User State
-                APP_STATE.user.id = uniqueId;
-                APP_STATE.user.name = name;
-                APP_STATE.user.class = studentClass;
-
-                saveUserState();
-
-                document.getElementById('main-header').classList.remove('hidden');
-                document.getElementById('mobile-nav').classList.remove('hidden');
-                updateHeaderUI();
-                updateSidebarBadges();
-
-                navigateToZone('dashboard');
-            };
-        }
-
-        function renderDashboardScreen() {
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="max-w-5xl mx-auto space-y-6">
-                <!-- Welcome Banner -->
-                <div class="glass-panel p-6 rounded-3xl border border-brand-500/30 bg-gradient-to-r from-slate-900 via-brand-950/40 to-slate-900 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="space-y-2 text-center md:text-left">
-                        <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-semibold border border-brand-500/30">
-                            Petualangan Matematika JSIT
-                        </span>
-                        <h2 class="text-2xl md:text-3xl font-extrabold text-white">Halo, ${APP_STATE.user.name}! 👋</h2>
-                        <p class="text-xs md:text-sm text-slate-300">Siap untuk memecahkan misteri Sistem Persamaan Linear hari ini?</p>
-                    </div>
-                    <div class="flex items-center space-x-4 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
-                        <div class="w-14 h-14 rounded-xl bg-gradient-to-tr from-gold to-amber-500 flex items-center justify-center text-2xl text-slate-950 font-black shadow-lg">
-                            ${APP_STATE.user.level}
-                        </div>
-                        <div>
-                            <div class="text-xs text-slate-400">Tingkat Level</div>
-                            <div class="text-sm font-bold text-white">${APP_STATE.user.levelTitle}</div>
-                            <div class="text-xs text-gold font-medium mt-0.5">${APP_STATE.user.totalXP} Total XP</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Zona TERPADU Map -->
-                <div>
-                    <h3 class="text-lg font-bold text-slate-100 mb-4 flex items-center space-x-2">
-                        <i class="fa-solid fa-map text-brand-400"></i>
-                        <span>Peta Petualangan TERPADU</span>
-                    </h3>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="dashboard-zone-cards">
-                        <!-- Zone cards injected dynamically -->
-                    </div>
-                </div>
-
-                <!-- Error History Remedial Widget -->
-                ${APP_STATE.user.errorHistory.length > 0 ? `
-                <div class="glass-panel p-5 rounded-2xl border border-rose-500/30 bg-rose-950/20 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2 text-rose-400 font-bold text-sm">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                            <span>Kesalahanmu Hari Ini (Mini Quest Remedial)</span>
-                        </div>
-                        <span class="text-xs bg-rose-500/20 text-rose-300 px-2.5 py-0.5 rounded-full font-semibold">
-                            ${APP_STATE.user.errorHistory.length} Pola Terdeteksi
-                        </span>
-                    </div>
-                    <p class="text-xs text-slate-300">Kamu melakukan beberapa kejanggalan pada langkah sebelumnya. Ingin melatih kemampuanmu kembali?</p>
-                    <button onclick="startMiniQuest()" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs shadow transition">
-                        Latih Lagi Kelemahan Ini
-                    </button>
-                </div>
-                ` : ''}
-            </div>`;
-
-            const zoneCardsContainer = document.getElementById('dashboard-zone-cards');
-            ZONES.filter(z => !['dashboard', 'report'].includes(z.id)).forEach((zone, idx) => {
-                const isCompleted = APP_STATE.user.completedZones[zone.id];
-                const card = document.createElement('div');
-                card.className = `glass-card p-5 rounded-2xl cursor-pointer relative overflow-hidden flex flex-col justify-between h-40 ${
-                    isCompleted ? 'border-emerald-500/40 bg-emerald-950/10' : ''
-                }`;
-                card.onclick = () => navigateToZone(zone.id);
-
-                card.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div class="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-lg ${zone.color}">
-                            <i class="fa-solid ${zone.icon}"></i>
-                        </div>
-                        <span class="text-[11px] font-bold px-2 py-1 rounded-full bg-slate-800 text-gold border border-slate-700">
-                            +${zone.xp || 50} XP
-                        </span>
-                    </div>
-
-                    <div>
-                        <h4 class="font-bold text-base text-slate-100">${zone.name}</h4>
-                        <p class="text-xs text-slate-400 mt-1">${getZoneDescription(zone.id)}</p>
-                    </div>
-
-                    <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-xs">
-                        <span class="font-semibold ${isCompleted ? 'text-emeraldCustom' : 'text-brand-400'}">
-                            ${isCompleted ? '<i class="fa-solid fa-circle-check"></i> Selesai' : 'Mulai Misi'}
-                        </span>
-                        <i class="fa-solid fa-chevron-right text-slate-500 text-xs"></i>
-                    </div>
-                `;
-                zoneCardsContainer.appendChild(card);
-            });
-        }
-
-        function getZoneDescription(id) {
-            const desc = {
-                telaah: 'Amati situasi nyata di kantin sekolah.',
-                eksplorasi: 'Manipulasi objek & lihat grafik koordinat.',
-                rumuskan: 'Temukan sendiri konsep dasar SPLDV.',
-                presentasikan: 'Uji pemahamanmu & ajari bot yang bingung!',
-                aplikasikan: 'Selesaikan tantangan bertingkat.',
-                duniawi: 'Penerapan SPLDV dalam kehidupan praktis.',
-                ukhrowi: 'Refleksi nilai kejujuran & amanah.',
-                finalMission: 'Misi Integratif: Solve the School Fair!'
-            };
-            return desc[id] || 'Misi pembelajaran interaktif.';
-        }
-
-        function renderTelaahScreen() {
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="max-w-4xl mx-auto space-y-6">
-                <!-- Zone Header -->
-                <div class="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-amber-500/30">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white">ZONA 1 — TELAAH 🔎</h2>
-                            <p class="text-xs text-slate-400">Mengamati situasi nyata & menemukan variabel</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                        +20 XP
-                    </span>
-                </div>
-
-                <!-- Context Interactive Scenario -->
-                <div class="glass-panel p-6 rounded-3xl space-y-6 border border-slate-800">
-                    <div class="text-center max-w-xl mx-auto space-y-2">
-                        <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Kisah Kantin Sekolah</span>
-                        <h3 class="text-xl font-extrabold text-white">Berapa Harga Roti dan Susu Sebenarnya?</h3>
-                        <p class="text-xs text-slate-300">Ahmad dan Fatimah membeli paket sarapan di kantin sekolah. Coba perhatikan struk transaksi berikut!</p>
-                    </div>
-
-                    <!-- Visual Comparison Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Transaksi 1 -->
-                        <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 space-y-3 text-center">
-                            <div class="text-xs font-bold text-brand-400 bg-brand-950/60 py-1 px-3 rounded-full inline-block">
-                                Pembelian Ahmad
-                            </div>
-                            <div class="flex justify-center items-center space-x-3 text-4xl py-2">
-                                <span title="Roti">🍞</span>
-                                <span title="Roti">🍞</span>
-                                <span title="Susu">🥛</span>
-                            </div>
-                            <div class="text-sm font-semibold text-slate-300">2 Roti + 1 Susu</div>
-                            <div class="text-lg font-black text-emeraldCustom bg-emerald-950/40 py-2 rounded-xl border border-emerald-500/20">
-                                Rp14.000
-                            </div>
-                        </div>
-
-                        <!-- Transaksi 2 -->
-                        <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 space-y-3 text-center">
-                            <div class="text-xs font-bold text-cyan-400 bg-cyan-950/60 py-1 px-3 rounded-full inline-block">
-                                Pembelian Fatimah
-                            </div>
-                            <div class="flex justify-center items-center space-x-3 text-4xl py-2">
-                                <span title="Roti">🍞</span>
-                                <span title="Susu">🥛</span>
-                                <span title="Susu">🥛</span>
-                            </div>
-                            <div class="text-sm font-semibold text-slate-300">1 Roti + 2 Susu</div>
-                            <div class="text-lg font-black text-emeraldCustom bg-emerald-950/40 py-2 rounded-xl border border-emerald-500/20">
-                                Rp16.000
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Guided Question 1 -->
-                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
-                        <p class="text-sm font-bold text-slate-200">
-                            Pertanyaan 1: Informasi penting apa yang <span class="text-amber-400">BELUM KITA KETAHUI</span> secara pasti dari kejadian di atas?
-                        </p>
-                        <div class="space-y-2" id="telaah-q1-options">
-                            <button onclick="checkTelaahAnswer(1, false, this)" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-500 text-xs font-medium text-slate-300 transition flex items-center space-x-3">
-                                <div class="w-5 h-5 rounded-full border border-slate-600 flex items-center justify-center text-xs">A</div>
-                                <span>Jumlah roti dan susu yang dibeli Ahmad dan Fatimah.</span>
-                            </button>
-                            <button onclick="checkTelaahAnswer(1, true, this)" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-500 text-xs font-medium text-slate-300 transition flex items-center space-x-3">
-                                <div class="w-5 h-5 rounded-full border border-slate-600 flex items-center justify-center text-xs">B</div>
-                                <span>Harga pasti untuk 1 buah roti dan 1 buah susu secara terpisah.</span>
-                            </button>
-                            <button onclick="checkTelaahAnswer(1, false, this)" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-500 text-xs font-medium text-slate-300 transition flex items-center space-x-3">
-                                <div class="w-5 h-5 rounded-full border border-slate-600 flex items-center justify-center text-xs">C</div>
-                                <span>Total uang yang dibayarkan oleh Ahmad dan Fatimah.</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Guided Question 2 (Hidden initially) -->
-                    <div id="telaah-step-2" class="hidden bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4 animate-fade-in">
-                        <p class="text-sm font-bold text-slate-200">
-                            Pertanyaan 2: Jika kita memisalkan <span class="text-brand-400 font-bold">Harga 1 Roti = x</span> dan <span class="text-cyan-400 font-bold">Harga 1 Susu = y</span>, bagaimana bentuk matematika dari belanjaan Ahmad?
-                        </p>
-                        <div class="space-y-2">
-                            <button onclick="checkTelaahAnswer(2, false, this)" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-500 text-xs font-medium text-slate-300 transition">
-                                x + y = 14.000
-                            </button>
-                            <button onclick="checkTelaahAnswer(2, true, this)" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-500 text-xs font-medium text-slate-300 transition">
-                                2x + y = 14.000
-                            </button>
-                            <button onclick="checkTelaahAnswer(2, false, this)" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-500 text-xs font-medium text-slate-300 transition">
-                                x + 2y = 14.000
-                            </button>
-                        </div>
-                    </div>
-
-                    <div id="telaah-complete-btn" class="hidden text-center pt-2">
-                        <button onclick="finishTelaah()" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 transition">
-                            Lanjut ke Zona Eksplorasi <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function checkTelaahAnswer(step, isCorrect, btnEl) {
-            if (isCorrect) {
-                btnEl.classList.remove('bg-slate-950', 'border-slate-800');
-                btnEl.classList.add('bg-emerald-950/60', 'border-emerald-500', 'text-emerald-300');
-                AudioFX.success();
-
-                if (step === 1) {
-                    document.getElementById('telaah-step-2').classList.remove('hidden');
-                } else if (step === 2) {
-                    document.getElementById('telaah-complete-btn').classList.remove('hidden');
-                }
-            } else {
-                btnEl.classList.remove('bg-slate-950', 'border-slate-800');
-                btnEl.classList.add('bg-rose-950/60', 'border-rose-500', 'text-rose-300');
-                AudioFX.error();
-                showModal('Belum Tepat', 'Coba perhatikan kembali jumlah barang dan informasi total harga yang diberikan!');
-            }
-        }
-
-        function finishTelaah() {
-            if (!APP_STATE.user.completedZones.telaah) {
-                APP_STATE.user.completedZones.telaah = true;
-                APP_STATE.user.scores.concept += 20;
-                addXP(20, 'Menyelesaikan Zona Telaah');
-                awardBadge('detektif');
-            }
-            navigateToZone('eksplorasi');
-        }
-
-        let eksplorasiX = 4000;
-        let eksplorasiY = 6000;
-
-        function renderEksplorasiScreen() {
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="max-w-5xl mx-auto space-y-6">
-                <!-- Zone Header -->
-                <div class="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-emerald-500/30">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-flask"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white">ZONA 2 — EKSPLORASI 🧪</h2>
-                            <p class="text-xs text-slate-400">Laboratorium Interaktif Grafik Koordinat & Simulasi Nilai</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                        +30 XP
-                    </span>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    <!-- Controls and Sliders -->
-                    <div class="lg:col-span-5 space-y-4">
-                        <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
-                            <h3 class="font-bold text-sm text-slate-200 flex items-center space-x-2">
-                                <i class="fa-solid fa-sliders text-brand-400"></i>
-                                <span>Uji Dugaan Nilai x dan y</span>
-                            </h3>
-
-                            <!-- Slider X -->
-                            <div class="space-y-1">
-                                <div class="flex justify-between text-xs font-semibold">
-                                    <span class="text-brand-400">Harga Roti (x)</span>
-                                    <span id="val-x-display" class="text-white font-bold">Rp${eksplorasiX.toLocaleString()}</span>
-                                </div>
-                                <input type="range" min="1000" max="8000" step="1000" value="${eksplorasiX}" id="slider-x" oninput="updateEksplorasiValues()" class="w-full accent-brand-500 cursor-pointer">
-                            </div>
-
-                            <!-- Slider Y -->
-                            <div class="space-y-1">
-                                <div class="flex justify-between text-xs font-semibold">
-                                    <span class="text-cyan-400">Harga Susu (y)</span>
-                                    <span id="val-y-display" class="text-white font-bold">Rp${eksplorasiY.toLocaleString()}</span>
-                                </div>
-                                <input type="range" min="1000" max="8000" step="1000" value="${eksplorasiY}" id="slider-y" oninput="updateEksplorasiValues()" class="w-full accent-cyan-500 cursor-pointer">
-                            </div>
-                        </div>
-
-                        <!-- Real-time Verification Box -->
-                        <div class="glass-panel p-5 rounded-2xl border border-slate-800 space-y-3">
-                            <h4 class="font-bold text-xs uppercase tracking-wider text-slate-400">Uji Kesamaan Persamaan</h4>
-
-                            <!-- Eq 1 -->
-                            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between items-center text-xs">
-                                <div>
-                                    <span class="font-bold text-slate-300">2x + y = 14.000</span>
-                                    <div id="calc-eq1" class="text-[11px] text-slate-400 mt-0.5">2(4.000) + 6.000 = 14.000</div>
-                                </div>
-                                <span id="status-eq1" class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">
-                                    ✔ Terpenuhi
-                                </span>
-                            </div>
-
-                            <!-- Eq 2 -->
-                            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between items-center text-xs">
-                                <div>
-                                    <span class="font-bold text-slate-300">x + 2y = 16.000</span>
-                                    <div id="calc-eq2" class="text-[11px] text-slate-400 mt-0.5">4.000 + 2(6.000) = 16.000</div>
-                                </div>
-                                <span id="status-eq2" class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">
-                                    ✔ Terpenuhi
-                                </span>
-                            </div>
-
-                            <div id="eksplorasi-success-banner" class="p-3 rounded-xl bg-gradient-to-r from-emerald-600/30 to-teal-600/30 border border-emerald-500/40 text-center space-y-1">
-                                <p class="text-xs font-extrabold text-emerald-300">🎉 Sempurna! Kedua Persamaan Terpenuhi!</p>
-                                <p class="text-[11px] text-slate-300">Titik potong berada pada (4.000, 6.000)</p>
-                            </div>
-                        </div>
-
-                        <button onclick="finishEksplorasi()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 font-bold text-white text-xs shadow-lg transition">
-                            Lanjut ke Zona Rumuskan <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-
-                    <!-- Interactive Coordinate Canvas Plotter -->
-                    <div class="lg:col-span-7 glass-panel p-5 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-bold text-sm text-slate-200">Grafik Koordinat Cartesius SPLDV</h3>
-                            <div class="flex space-x-3 text-[11px] font-semibold">
-                                <span class="flex items-center space-x-1 text-brand-400">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-brand-400 inline-block"></span>
-                                    <span>2x + y = 14</span>
-                                </span>
-                                <span class="flex items-center space-x-1 text-cyan-400">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span>
-                                    <span>x + 2y = 16</span>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="relative w-full aspect-square bg-slate-950 rounded-xl border border-slate-800 overflow-hidden flex items-center justify-center">
-                            <canvas id="spldv-canvas" class="w-full h-full"></canvas>
-                        </div>
-                        <p class="text-[11px] text-slate-400 text-center italic">
-                            *Garis merah menunjukkan posisi titik dugaan kamu saat ini pada bidang koordinat.
-                        </p>
-                    </div>
-                </div>
-            </div>`;
-
-            setTimeout(() => {
-                initEksplorasiCanvas();
-                updateEksplorasiValues();
-            }, 50);
-        }
-
-        function updateEksplorasiValues() {
-            eksplorasiX = parseInt(document.getElementById('slider-x').value);
-            eksplorasiY = parseInt(document.getElementById('slider-y').value);
-
-            document.getElementById('val-x-display').innerText = `Rp${eksplorasiX.toLocaleString()}`;
-            document.getElementById('val-y-display').innerText = `Rp${eksplorasiY.toLocaleString()}`;
-
-            const res1 = 2 * eksplorasiX + eksplorasiY;
-            const res2 = eksplorasiX + 2 * eksplorasiY;
-
-            document.getElementById('calc-eq1').innerText = `2(${eksplorasiX/1000}k) + ${eksplorasiY/1000}k = ${res1/1000}k`;
-            document.getElementById('calc-eq2').innerText = `${eksplorasiX/1000}k + 2(${eksplorasiY/1000}k) = ${res2/1000}k`;
-
-            const eq1Valid = res1 === 14000;
-            const eq2Valid = res2 === 16000;
-
-            const st1 = document.getElementById('status-eq1');
-            st1.className = `px-2.5 py-1 rounded-full font-bold text-[10px] ${eq1Valid ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`;
-            st1.innerText = eq1Valid ? '✔ Terpenuhi' : '✘ Salah';
-
-            const st2 = document.getElementById('status-eq2');
-            st2.className = `px-2.5 py-1 rounded-full font-bold text-[10px] ${eq2Valid ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'}`;
-            st2.innerText = eq2Valid ? '✔ Terpenuhi' : '✘ Salah';
-
-            const banner = document.getElementById('eksplorasi-success-banner');
-            if (eq1Valid && eq2Valid) {
-                banner.classList.remove('hidden');
-            } else {
-                banner.classList.add('hidden');
-            }
-
-            drawEksplorasiGraph();
-        }
-
-        function initEksplorasiCanvas() {
-            const canvas = document.getElementById('spldv-canvas');
-            if (!canvas) return;
-            const rect = canvas.parentElement.getBoundingClientRect();
-            canvas.width = rect.width * window.devicePixelRatio;
-            canvas.height = rect.height * window.devicePixelRatio;
-        }
-
-        function drawEksplorasiGraph() {
-            const canvas = document.getElementById('spldv-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            const w = canvas.width;
-            const h = canvas.height;
-
-            ctx.clearRect(0, 0, w, h);
-
-            // Grid scale: 0 to 20 (in thousands)
-            const padding = 40;
-            const graphW = w - padding * 2;
-            const graphH = h - padding * 2;
-
-            function toCanvasX(val) {
-                return padding + (val / 20) * graphW;
-            }
-            function toCanvasY(val) {
-                return h - padding - (val / 20) * graphH;
-            }
-
-            // Draw Axes
-            ctx.strokeStyle = '#334155';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            // X Axis
-            ctx.moveTo(padding, h - padding);
-            ctx.lineTo(w - padding, h - padding);
-            // Y Axis
-            ctx.moveTo(padding, padding);
-            ctx.lineTo(padding, h - padding);
-            ctx.stroke();
-
-            // Grid lines
-            ctx.strokeStyle = '#1e293b';
-            ctx.lineWidth = 1;
-            for (let i = 0; i <= 20; i += 2) {
-                // Vertical
-                ctx.beginPath();
-                ctx.moveTo(toCanvasX(i), padding);
-                ctx.lineTo(toCanvasX(i), h - padding);
-                ctx.stroke();
-
-                // Horizontal
-                ctx.beginPath();
-                ctx.moveTo(padding, toCanvasY(i));
-                ctx.lineTo(w - padding, toCanvasY(i));
-                ctx.stroke();
-            }
-
-            // Line 1: 2x + y = 14  => y = 14 - 2x
-            ctx.strokeStyle = '#38bdf8'; // brand blue
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.moveTo(toCanvasX(0), toCanvasY(14));
-            ctx.lineTo(toCanvasX(7), toCanvasY(0));
-            ctx.stroke();
-
-            // Line 2: x + 2y = 16  => y = 8 - 0.5x
-            ctx.strokeStyle = '#22d3ee'; // cyan
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.moveTo(toCanvasX(0), toCanvasY(8));
-            ctx.lineTo(toCanvasX(16), toCanvasY(0));
-            ctx.stroke();
-
-            // Solution Point Intersection (4, 6)
-            ctx.fillStyle = '#fbbf24';
-            ctx.beginPath();
-            ctx.arc(toCanvasX(4), toCanvasY(6), 8, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Current Slider Point
-            const currX = eksplorasiX / 1000;
-            const currY = eksplorasiY / 1000;
-            ctx.fillStyle = '#f43f5e';
-            ctx.beginPath();
-            ctx.arc(toCanvasX(currX), toCanvasY(currY), 6, 0, Math.PI * 2);
-            ctx.fill();
-        }
-
-        function finishEksplorasi() {
-            if (!APP_STATE.user.completedZones.eksplorasi) {
-                APP_STATE.user.completedZones.eksplorasi = true;
-                APP_STATE.user.scores.concept += 30;
-                addXP(30, 'Menyelesaikan Zona Eksplorasi');
-                awardBadge('ahli_grafik');
-            }
-            navigateToZone('rumuskan');
-        }
-
-        function renderRumuskanScreen() {
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="max-w-4xl mx-auto space-y-6">
-                <!-- Zone Header -->
-                <div class="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-purple-500/30">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-brain"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white">ZONA 3 — RUMUSKAN 🧠</h2>
-                            <p class="text-xs text-slate-400">Merumuskan Definisi & Bentuk Umum SPLDV</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                        +50 XP
-                    </span>
-                </div>
-
-                <!-- Self Formulation Area -->
-                <div class="glass-panel p-6 rounded-3xl space-y-6 border border-slate-800">
-                    <div class="space-y-2">
-                        <h3 class="text-base font-bold text-white">1. Refleksi Pemahamanmu</h3>
-                        <p class="text-xs text-slate-300">Berdasarkan hasil pengamatan dan eksperimen grafik tadi, menurut bahasamu sendiri, apa yang dimaksud dengan Sistem Persamaan Linear Dua Variabel (SPLDV)?</p>
-                        <textarea id="user-concept-formulation" rows="3" placeholder="Tuliskan pemahamanmu di sini..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-purple-500"></textarea>
-                        <button onclick="submitConceptFormulation()" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs transition">
-                            Simpan Refleksi & Buka Konsep Formal
-                        </button>
-                    </div>
-
-                    <!-- Formal Concept Card (Hidden initially) -->
-                    <div id="formal-concept-card" class="hidden bg-slate-900 p-6 rounded-2xl border border-purple-500/40 space-y-4 animate-fade-in">
-                        <div class="flex items-center space-x-2 text-purple-400 font-bold text-sm">
-                            <i class="fa-solid fa-book-bookmark"></i>
-                            <span>KONSEP FORMAL MATEMATIKA</span>
-                        </div>
-
-                        <p class="text-xs text-slate-200 leading-relaxed">
-                            <strong class="text-purple-300">Sistem Persamaan Linear Dua Variabel (SPLDV)</strong> adalah kumpulan dari dua atau lebih persamaan linear yang memiliki dua variabel yang sama, dan harus dipenuhi secara bersamaan.
-                        </p>
-
-                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center space-y-2">
-                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Bentuk Umum SPLDV</span>
-                            <div class="text-lg font-black text-brand-400 font-mono tracking-wider">
-                                ax + by = c <br>
-                                dx + ey = f
-                            </div>
-                            <div class="text-[11px] text-slate-400">
-                                Keterangan: x, y = Variabel | a, b, d, e = Koefisien | c, f = Konstanta
-                            </div>
-                        </div>
-
-                        <!-- 3 Solution Types Visual Card -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-center pt-2">
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-                                <div class="text-xs font-bold text-emerald-400">Tepat 1 Solusi</div>
-                                <div class="text-[10px] text-slate-400">Garis berpotongan di 1 titik.</div>
-                            </div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-                                <div class="text-xs font-bold text-rose-400">Tidak Ada Solusi</div>
-                                <div class="text-[10px] text-slate-400">Garis sejajar (tidak berpotongan).</div>
-                            </div>
-                            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-                                <div class="text-xs font-bold text-amber-400">Tak Hingga Solusi</div>
-                                <div class="text-[10px] text-slate-400">Garis berimpit (sama persis).</div>
-                            </div>
-                        </div>
-
-                        <div class="pt-4 text-center">
-                            <button onclick="finishRumuskan()" class="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold text-white text-xs shadow-lg transition">
-                                Lanjut ke Zona Presentasikan <i class="fa-solid fa-arrow-right ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function submitConceptFormulation() {
-            const txt = document.getElementById('user-concept-formulation').value.trim();
-            if (!txt) {
-                showModal('Peringatan', 'Silakan isi refleksi pemahamanmu terlebih dahulu!');
-                return;
-            }
-            document.getElementById('formal-concept-card').classList.remove('hidden');
-            AudioFX.success();
-        }
-
-        function finishRumuskan() {
-            if (!APP_STATE.user.completedZones.rumuskan) {
-                APP_STATE.user.completedZones.rumuskan = true;
-                APP_STATE.user.scores.concept += 50;
-                addXP(50, 'Menyelesaikan Zona Rumuskan');
-            }
-            navigateToZone('presentasikan');
-        }
-
-        function renderPresentasikanScreen() {
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="max-w-4xl mx-auto space-y-6">
-                <!-- Zone Header -->
-                <div class="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-cyan-500/30">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-microphone"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white">ZONA 4 — PRESENTASIKAN 🎤</h2>
-                            <p class="text-xs text-slate-400">Penalaran Komunikasi & Mode "Teach the AI"</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                        +40 XP
-                    </span>
-                </div>
-
-                <!-- Mode Selection -->
-                <div class="glass-panel p-6 rounded-3xl space-y-6 border border-slate-800">
-                    <div class="border-b border-slate-800 pb-4">
-                        <h3 class="font-bold text-base text-white">Misi: Bantu Robi (AI Bot) Memperbaiki Kesalahannya!</h3>
-                        <p class="text-xs text-slate-300 mt-1">Robi si Bot sedang mengerjakan soal SPLDV, tapi ia keliru saat melakukan proses eliminasi. Bisakah kamu menemukan letak kesalahannya?</p>
-                    </div>
-
-                    <!-- AI Reasoning Box -->
-                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-sm font-bold">
-                                🤖
-                            </div>
-                            <div>
-                                <div class="text-xs font-bold text-white">Pengerjaan Robi si Bot:</div>
-                                <div class="text-[11px] text-slate-400">Soal: Carilah nilai x dan y dari (2x + y = 14) dan (x + 2y = 16)</div>
-                            </div>
-                        </div>
-
-                        <div class="p-3 bg-slate-950 rounded-xl font-mono text-xs space-y-1 text-slate-300 border border-slate-800">
-                            <p>Langkah 1: Kalikan persamaan pertama dengan 2 agar koefisien y sama.</p>
-                            <p class="text-amber-400">4x + 2y = 14  ← (Robi hanya mengalikan x dan y, lupa mengalikan 14)</p>
-                            <p>Langkah 2: Kurangkan dengan persamaan kedua (x + 2y = 16)</p>
-                            <p>3x = -2  ⇒  x = -2/3</p>
-                        </div>
-                    </div>
-
-                    <!-- Question -->
-                    <div class="space-y-3">
-                        <label class="block text-xs font-bold text-slate-200">Di manakah letak kesalahan penalaran Robi?</label>
-                        <div class="space-y-2">
-                            <button onclick="checkPresentasiAnswer(false, this)" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-cyan-500 text-xs text-slate-300 transition">
-                                Robi seharusnya menjumlahkan kedua persamaan, bukan mengurangkannya.
-                            </button>
-                            <button onclick="checkPresentasiAnswer(true, this)" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-cyan-500 text-xs text-slate-300 transition">
-                                Pada Langkah 1, Robi lupa mengalikan konstanta ruas kanan (14) dengan angka 2. Seharusnya hasilnya 28.
-                            </button>
-                            <button onclick="checkPresentasiAnswer(false, this)" class="w-full text-left p-3.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-cyan-500 text-xs text-slate-300 transition">
-                                Robi salah memilih metode, seharusnya menggunakan metode grafik.
-                            </button>
-                        </div>
-                    </div>
-
-                    <div id="presentasi-complete-btn" class="hidden text-center pt-2">
-                        <button onclick="finishPresentasikan()" class="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 font-bold text-white text-xs shadow-lg transition">
-                            Lanjut ke Zona Aplikasikan <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function checkPresentasiAnswer(isCorrect, btnEl) {
-            if (isCorrect) {
-                btnEl.classList.remove('bg-slate-950', 'border-slate-800');
-                btnEl.classList.add('bg-emerald-950/60', 'border-emerald-500', 'text-emerald-300');
-                AudioFX.success();
-                document.getElementById('presentasi-complete-btn').classList.remove('hidden');
-                showModal('🎉 Luar Biasa!', 'Kamu berhasil mengoreksi kesalahan logika Robi! Ingat: Saat mengalikan persamaan, seluruh suku pada kedua ruas harus dikalikan dengan bilangan yang sama.');
-            } else {
-                btnEl.classList.remove('bg-slate-950', 'border-slate-800');
-                btnEl.classList.add('bg-rose-950/60', 'border-rose-500', 'text-rose-300');
-                AudioFX.error();
-                showModal('Belum Tepat', 'Coba amati kembali perkalian angka 14 pada Langkah 1 pengerjaan Robi!');
-            }
-        }
-
-        function finishPresentasikan() {
-            if (!APP_STATE.user.completedZones.presentasikan) {
-                APP_STATE.user.completedZones.presentasikan = true;
-                APP_STATE.user.scores.reasoning += 40;
-                addXP(40, 'Menyelesaikan Zona Presentasikan');
-                awardBadge('pemecah_masalah');
-            }
-            navigateToZone('aplikasikan');
-        }
-
-        let currLevelPractice = 1;
-        let hintCount = 0;
-
-        function renderAplikasikanScreen() {
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="max-w-4xl mx-auto space-y-6">
-                <!-- Zone Header -->
-                <div class="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-indigo-500/30">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-rocket"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white">ZONA 5 — APLIKASIKAN 🚀</h2>
-                            <p class="text-xs text-slate-400">Latihan Terpandu Step-by-Step dengan Sistem Hint</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                        +60 XP
-                    </span>
-                </div>
-
-                <!-- Problem Solver Interface -->
-                <div class="glass-panel p-6 rounded-3xl space-y-6 border border-slate-800">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Latihan Level 1: Metode Eliminasi</span>
-                        <button onclick="showHint()" class="px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-300 font-semibold text-xs flex items-center space-x-1.5 hover:bg-amber-500/30 transition">
-                            <i class="fa-solid fa-lightbulb"></i>
-                            <span>Bantuan Hint (<span id="hint-level-text">Level 0</span>)</span>
-                        </button>
-                    </div>
-
-                    <!-- Problem Card -->
-                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-2">
-                        <p class="text-xs text-slate-400 font-semibold">Soal Tantangan:</p>
-                        <p class="text-sm font-bold text-slate-100">
-                            Di sebuah toko alat tulis, 3 pensil dan 2 pulpen berharga Rp19.000. Sedangkan 2 pensil dan 3 pulpen berharga Rp21.000. Tentukan harga 1 pensil (x) dan 1 pulpen (y)!
-                        </p>
-                    </div>
-
-                    <!-- Interactive Step Builder -->
-                    <div class="space-y-4">
-                        <!-- Step 1: Model -->
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
-                            <span class="text-xs font-bold text-brand-400">Langkah 1: Tentukan Persamaan Matematika</span>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-slate-300">
-                                    Persamaan 1: <strong>3x + 2y = 19.000</strong>
-                                </div>
-                                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-slate-300">
-                                    Persamaan 2: <strong>2x + 3y = 21.000</strong>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 2: Input Solution -->
-                        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3">
-                            <div class="flex justify-between items-center">
-                                <span class="text-xs font-bold text-brand-400">Langkah 2: Hitung Nilai x dan y</span>
-                                <button onclick="explainWhy()" class="text-[11px] text-cyan-400 hover:underline flex items-center space-x-1">
-                                    <i class="fa-solid fa-circle-question"></i>
-                                    <span>Kenapa Eliminasi?</span>
-                                </button>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-[11px] font-semibold text-slate-400 mb-1">Harga 1 Pensil (x)</label>
-                                    <div class="flex items-center space-x-2">
-                                        <span class="text-xs text-slate-400">Rp</span>
-                                        <input type="number" id="ans-x" placeholder="Contoh: 3000" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-500">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="block text-[11px] font-semibold text-slate-400 mb-1">Harga 1 Pulpen (y)</label>
-                                    <div class="flex items-center space-x-2">
-                                        <span class="text-xs text-slate-400">Rp</span>
-                                        <input type="number" id="ans-y" placeholder="Contoh: 5000" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-500">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-between items-center pt-2">
-                        <button onclick="checkAplikasikanAnswer()" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 font-bold text-white text-xs shadow-lg transition">
-                            Periksa Jawaban
-                        </button>
-                        <button id="btn-next-aplikasikan" onclick="finishAplikasikan()" class="hidden px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 font-bold text-white text-xs shadow-lg transition">
-                            Lanjut ke Zona Duniawi <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function showHint() {
-            hintCount = (hintCount % 3) + 1;
-            document.getElementById('hint-level-text').innerText = `Level ${hintCount}`;
-
-            const hints = [
-                "Petunjuk 1: Cobalah samakan koefisien x dengan mengalikan Persamaan (1) dengan 2, dan Persamaan (2) dengan 3.",
-                "Petunjuk 2: Hasilnya adalah (6x + 4y = 38.000) dan (6x + 9y = 63.000). Sekarang kurangkan kedua persamaan!",
-                "Petunjuk 3: Hasil penguarangan memberi -5y = -25.000, sehingga y = 5.000. Lalu substitusi ke salah satu persamaan untuk dapat x = 3.000."
-            ];
-
-            showModal(`💡 Bantuan Hint ${hintCount}`, hints[hintCount - 1]);
-        }
-
-        function explainWhy() {
-            showModal('Kenapa Menggunakan Eliminasi?', `
-            <div class="space-y-2 text-xs text-slate-300 leading-relaxed">
-                <p>Metode eliminasi sangat cocok digunakan ketika koefisien pada variabel mudah disamakan dengan perkalian sederhana.</p>
-                <p>Dengan mengalikan seluruh suku dalam persamaan dengan sebuah angka, kita menjaga kesetaraan persamaan tanpa mengubah nilai variabelnya!</p>
-            </div>`);
-        }
-
-        function checkAplikasikanAnswer() {
-            const xVal = parseInt(document.getElementById('ans-x').value);
-            const yVal = parseInt(document.getElementById('ans-y').value);
-
-            if (xVal === 3000 && yVal === 5000) {
-                AudioFX.success();
-                showModal('🎉 TEPAT SEKALI!', 'Perhitunganmu sangat akurat! 1 Pensil = Rp3.000 dan 1 Pulpen = Rp5.000.');
-                document.getElementById('btn-next-aplikasikan').classList.remove('hidden');
-            } else {
-                AudioFX.error();
-                APP_STATE.user.errorHistory.push('Operasi Aljabar Eliminasi');
-                showModal('Belum Tepat', 'Coba perhatikan kembali perkalian dan pengurangan persamaanmu. Jangan ragu gunakan tombol Bantuan Hint!');
-            }
-        }
-
-        function finishAplikasikan() {
-            if (!APP_STATE.user.completedZones.aplikasikan) {
-                APP_STATE.user.completedZones.aplikasikan = true;
-                APP_STATE.user.scores.process += 60;
-                APP_STATE.user.scores.accuracy += 60;
-                addXP(60, 'Menyelesaikan Zona Aplikasikan');
-                awardBadge('master_eliminasi');
-            }
-            navigateToZone('duniawi');
-        }
-
-        function renderDuniawiScreen() {
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="max-w-4xl mx-auto space-y-6">
-                <!-- Zone Header -->
-                <div class="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-teal-500/30">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-earth-americas"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white">ZONA 6 — DUNIAWI 🌍</h2>
-                            <p class="text-xs text-slate-400">Aplikasi Kontekstual Matematika dalam Kehidupan Nyata</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">
-                        +50 XP
-                    </span>
-                </div>
-
-                <!-- Mission Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Mission Parkir -->
-                    <div class="glass-card p-5 rounded-2xl border border-slate-800 space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl">🏍️ 🚗</span>
-                            <span class="text-xs font-bold text-teal-400">Misi Parkir Sekolah</span>
-                        </div>
-                        <h4 class="font-bold text-sm text-white">Menghitung Jumlah Motor dan Mobil</h4>
-                        <p class="text-xs text-slate-300">
-                            Di lahan parkir sekolah terdapat 12 kendaraan (motor & mobil) dengan total 32 roda. Berapa banyak motor dan mobil?
-                        </p>
-                        <button onclick="solveParkirMission()" class="w-full py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 font-semibold text-xs text-white transition">
-                            Selesaikan Misi Parkir
-                        </button>
-                    </div>
-
-                    <!-- Mission Usaha Sederhana -->
-                    <div class="glass-card p-5 rounded-2xl border border-slate-800 space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl">🎟️ 🍿</span>
-                            <span class="text-xs font-bold text-teal-400">Misi Pentas Seni</span>
-                        </div>
-                        <h4 class="font-bold text-sm text-white">Menghitung Tiket Acara Sekolah</h4>
-                        <p class="text-xs text-slate-300">
-                            Panitia menjual tiket siswa & tiket umum. 2 tiket siswa + 1 tiket umum = Rp50.000. 1 tiket siswa + 2 tiket umum = Rp70.000.
-                        </p>
-                        <button onclick="solveTicketMission()" class="w-full py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 font-semibold text-xs text-white transition">
-                            Selesaikan Misi Tiket
-                        </button>
-                    </div>
-                </div>
-
-                <div id="duniawi-complete-area" class="hidden glass-panel p-6 rounded-2xl border border-emerald-500/30 text-center space-y-3">
-                    <p class="text-xs text-slate-200">
-                        "Matematika bukan sekadar angka di buku. Matematika membantu manusia mengambil keputusan dengan tepat dan efisien dalam kehidupan sehari-hari."
-                    </p>
-                    <button onclick="finishDuniawi()" class="px-6 py-3 rounded-xl bg-teal-600 hover:bg-teal-500 font-bold text-white text-xs shadow-lg transition">
-                        Lanjut ke Zona Ukhrowi <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </button>
-                </div>
-            </div>`;
-        }
-
-        function solveParkirMission() {
-            showModal('Misi Parkir Terpecahkan!', `
-            <div class="space-y-2 text-xs text-slate-300">
-                <p><strong>Model:</strong> x + y = 12 (kendaraan) dan 2x + 4y = 32 (roda)</p>
-                <p><strong>Hasil:</strong> 8 Motor (x) dan 4 Mobil (y).</p>
-            </div>`);
-            document.getElementById('duniawi-complete-area').classList.remove('hidden');
-        }
-
-        function solveTicketMission() {
-            showModal('Misi Tiket Terpecahkan!', `
-            <div class="space-y-2 text-xs text-slate-300">
-                <p><strong>Hasil:</strong> Tiket Siswa = Rp10.000 dan Tiket Umum = Rp30.000.</p>
-            </div>`);
-            document.getElementById('duniawi-complete-area').classList.remove('hidden');
-        }
-
-        function finishDuniawi() {
-            if (!APP_STATE.user.completedZones.duniawi) {
-                APP_STATE.user.completedZones.duniawi = true;
-                APP_STATE.user.scores.application += 50;
-                addXP(50, 'Menyelesaikan Zona Duniawi');
-                awardBadge('duniawi_solver');
-            }
-            navigateToZone('ukhrowi');
-        }
-
-        function renderUkhrowiScreen() {
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="max-w-4xl mx-auto space-y-6">
-                <!-- Zone Header -->
-                <div class="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-rose-500/30">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-hands-praying"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white">ZONA 7 — UKHROWI 🤲</h2>
-                            <p class="text-xs text-slate-400">Refleksi Nilai Keutamaan Ilmu, Amanah & Kejujuran</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
-                        +30 XP
-                    </span>
-                </div>
-
-                <!-- Reflection Content -->
-                <div class="glass-panel p-6 rounded-3xl space-y-6 border border-slate-800 text-center">
-                    <div class="max-w-xl mx-auto space-y-3">
-                        <span class="text-xs font-bold uppercase tracking-wider text-rose-400">Ilmu Sebagai Amanah</span>
-                        <h3 class="text-xl font-extrabold text-white">Ketelitian dalam Berhitung adalah Bagian dari Sikap Amanah</h3>
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            Kemampuan berhitung dan memecahkan persamaan linear bukan hanya sekadar untuk mendapat nilai di sekolah, melainkan sarana untuk bertransaksi secara jujur, menghindari kecurangan, dan menegakkan keadilan.
-                        </p>
-                    </div>
-
-                    <!-- Authentic Reference Box -->
-                    <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800 text-left space-y-3 max-w-2xl mx-auto">
-                        <div class="flex items-center space-x-2 text-gold text-xs font-bold">
-                            <i class="fa-solid fa-book-quran"></i>
-                            <span>QS. Al-Mutaffifin: 1-3</span>
-                        </div>
-                        <p class="text-xs text-slate-300 italic leading-relaxed">
-                            "Kecelakaan besarlah bagi orang-orang yang curang, (yaitu) orang-orang yang apabila menerima takaran dari orang lain mereka minta dipenuhi, dan apabila mereka menakar atau menimbang untuk orang lain, mereka mengurangi."
-                        </p>
-                    </div>
-
-                    <!-- Reflective Interaction -->
-                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 text-left space-y-3 max-w-2xl mx-auto">
-                        <label class="block text-xs font-bold text-slate-200">Refleksi Diri:</label>
-                        <p class="text-xs text-slate-300">Bagaimana kamu akan memanfaatkan ilmu matematika yang telah kamu pelajari hari ini untuk kebaikan?</p>
-                        <textarea id="ukhrowi-reflection-input" rows="3" placeholder="Tuliskan niat kebaikanmu..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-rose-500"></textarea>
-                    </div>
-
-                    <button onclick="finishUkhrowi()" class="px-6 py-3 rounded-xl bg-rose-600 hover:bg-rose-500 font-bold text-white text-xs shadow-lg transition">
-                        Simpan Refleksi & Lanjut ke Final Mission <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </button>
-                </div>
-            </div>`;
-        }
-
-        function finishUkhrowi() {
-            const txt = document.getElementById('ukhrowi-reflection-input').value.trim();
-            if (!txt) {
-                showModal('Peringatan', 'Silakan tuliskan refleksi singkatmu terlebih dahulu!');
-                return;
-            }
-
-            if (!APP_STATE.user.completedZones.ukhrowi) {
-                APP_STATE.user.completedZones.ukhrowi = true;
-                addXP(30, 'Menyelesaikan Zona Ukhrowi');
-                awardBadge('ilmu_bermanfaat');
-            }
-            navigateToZone('finalMission');
-        }
-
-        function renderFinalMissionScreen() {
-            const container = document.getElementById('main-screen-container');
-            container.innerHTML = `
-            <div class="max-w-4xl mx-auto space-y-6">
-                <!-- Zone Header -->
-                <div class="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-gold/30">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-gold/20 text-gold flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-trophy"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white">FINAL MISSION 🏆</h2>
-                            <p class="text-xs text-slate-400">SOLVE THE SCHOOL FAIR</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-gold/20 text-gold border border-gold/30">
-                        +100 XP
-                    </span>
-                </div>
-
-                <div class="glass-panel p-6 rounded-3xl space-y-6 border border-slate-800">
-                    <div class="space-y-2 text-center">
-                        <h3 class="text-xl font-extrabold text-white">Misi Kelola Stand Bazar Sekolah</h3>
-                        <p class="text-xs text-slate-300">Selesaikan tantangan integratif ini untuk menutup petualangan belajar kamu!</p>
-                    </div>
-
-                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3 text-xs text-slate-300">
-                        <p><strong>Skenario:</strong> Stand kelasmu menjual dua jenis paket hemat:</p>
-                        <ul class="list-disc list-inside space-y-1">
-                            <li>Paket A (2 Makanan + 1 Minuman) = Rp22.000</li>
-                            <li>Paket B (1 Makanan + 2 Minuman) = Rp20.000</li>
-                        </ul>
-                        <p>Berapakah modal awal untuk 1 Makanan (x) dan 1 Minuman (y)?</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Harga 1 Makanan (x)</label>
-                            <input type="number" id="fm-ans-x" placeholder="Rp..." class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-gold">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-1">Harga 1 Minuman (y)</label>
-                            <input type="number" id="fm-ans-y" placeholder="Rp..." class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-gold">
-                        </div>
-                    </div>
-
-                    <button onclick="checkFinalMission()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-gold to-amber-500 font-bold text-slate-950 text-xs shadow-lg transition">
-                        Kirim Jawaban Misi Akhir
-                    </button>
-                </div>
-            </div>`;
-        }
-
-        function checkFinalMission() {
-            const x = parseInt(document.getElementById('fm-ans-x').value);
-            const y = parseInt(document.getElementById('fm-ans-y').value);
-
-            if (x === 8000 && y === 6000) {
-                AudioFX.levelUp();
-                if (!APP_STATE.user.completedZones.finalMission) {
-                    APP_STATE.user.completedZones.finalMission = true;
-                    addXP(100, 'Menyelesaikan Final Mission!');
-                    awardBadge('math_explorer');
-                }
-                showModal('🏆 MISI SELESAI!', 'Selamat! Kamu telah berhasil menyelesaikan seluruh petualangan Sistem Persamaan Linear!', () => {
-                    navigateToZone('report');
-                });
-            } else {
-                AudioFX.error();
-                showModal('Belum Tepat', 'Coba periksa kembali eliminasi persamaan 2x + y = 22.000 dan x + 2y = 20.000');
-            }
-        }
-
-        function renderReportScreen() {
-            const container = document.getElementById('main-screen-container');
-            const u = APP_STATE.user;
-
-            container.innerHTML = `
-            <div class="max-w-4xl mx-auto space-y-6">
-                <!-- Zone Header -->
-                <div class="flex items-center justify-between bg-slate-900 p-4 rounded-2xl border border-slate-700">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-chart-pie"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg text-white">LAPORAN HASIL BELAJAR SISWA 📊</h2>
-                            <p class="text-xs text-slate-400">Ringkasan Kemampuan Matematis JSIT</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-panel p-6 rounded-3xl space-y-6 border border-slate-800">
-                    <!-- Student Summary Header -->
-                    <div class="flex flex-col sm:flex-row items-center justify-between p-4 bg-slate-900 rounded-2xl border border-slate-800 gap-4">
-                        <div>
-                            <h3 class="text-lg font-bold text-white">${u.name}</h3>
-                            <p class="text-xs text-slate-400">Kelas ${u.class} | ID: ${u.id || 'N/A'}</p>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-xs text-slate-400">Total Perolehan</span>
-                            <div class="text-xl font-black text-gold">${u.totalXP} XP</div>
-                        </div>
-                    </div>
-
-                    <!-- Scores Breakdown -->
-                    <div class="space-y-3">
-                        <h4 class="font-bold text-sm text-slate-200">Komponen Penilaian Berbasis Proses</h4>
-
-                        <div class="space-y-2 text-xs">
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-slate-300">Pemahaman Konsep (Concept Score)</span>
-                                    <span class="font-bold text-brand-400">${u.scores.concept}%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-brand-500 h-full" style="width: ${u.scores.concept}%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-slate-300">Proses & Langkah (Process Score)</span>
-                                    <span class="font-bold text-emerald-400">${u.scores.process}%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-emerald-500 h-full" style="width: ${u.scores.process}%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-slate-300">Penalaran & Komunikasi (Reasoning Score)</span>
-                                    <span class="font-bold text-cyan-400">${u.scores.reasoning}%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-cyan-500 h-full" style="width: ${u.scores.reasoning}%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-slate-300">Aplikasi Kontekstual (Application Score)</span>
-                                    <span class="font-bold text-teal-400">${u.scores.application}%</span>
-                                </div>
-                                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-teal-500 h-full" style="width: ${u.scores.application}%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-4 flex justify-center space-x-3">
-                        <button onclick="window.print()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs transition">
-                            <i class="fa-solid fa-print mr-1"></i> Cetak Laporan
-                        </button>
-                        <button onclick="navigateToZone('dashboard')" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs transition">
-                            Kembali ke Dashboard
-                        </button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        window.onload = function() {
-            // Check if user session exists in localStorage
-            const lastId = localStorage.getItem('math_app_last_user_id');
-            if (lastId && loadUserState(lastId)) {
-                document.getElementById('main-header').classList.remove('hidden');
-                document.getElementById('mobile-nav').classList.remove('hidden');
-                updateHeaderUI();
-                updateSidebarBadges();
-                navigateToZone('dashboard');
-            } else {
-                navigateToZone('welcome');
-            }
+            <div id="hint-box" class="mt-3 p-3 rounded-xl bg-amber-950/40 border border-amber-500/30 text-xs text-amber-200 hidden"></div>
+            <div id="answer-feedback" class="mt-3 p-3 rounded-xl hidden text-xs"></div>
+          </div>
+        `;
+      }
+
+      showAplikasikanHint() {
+        this.currentQuestionHintsUsed++;
+        const questions = {
+          1: ["Ingat bentuk $3^x = 81$.", "Perkalikan 3 berulang: 3 × 3 × 3 × 3.", "3⁴ = 81, jadi hasilnya adalah 4."],
+          2: ["Gunakan sifat $log_a M + log_a N = log_a(M \\cdot N)$.", "$log_2(8 \\cdot 4) = log_2(32)$.", "2⁵ = 32, jadi jawabannya 5."],
+          3: ["Ubah persamaan logaritma ke bentuk eksponen $2^5 = x$.", "Hitung $2 \\times 2 \\times 2 \\times 2 \\times 2$.", "Hasil dari $2^5$ adalah 32."],
+          4: ["Uji nilai $x=8$: $log_2(8) + log_2(4) = 3 + 2 = 5$.", "Periksa apakah langkah $4x = 32$ menghasilkan $x = 8$.", "Hasil $x=8$ sebenarnya sudah benar!"]
         };
-    </script>
+
+        const hints = questions[this.currentAppLevel];
+        const idx = Math.min(this.currentQuestionHintsUsed - 1, hints.length - 1);
+
+        const hintBox = document.getElementById('hint-box');
+        hintBox.classList.remove('hidden');
+        hintBox.innerHTML = `<strong>Petunjuk ${idx + 1}:</strong> ${hints[idx]}`;
+
+        document.getElementById('hint-status').innerText = `Bonus XP berkurang (Hint terpakai: ${this.currentQuestionHintsUsed})`;
+      }
+
+      submitAplikasikanAnswer(selectedIdx, correctIdx) {
+        const fb = document.getElementById('answer-feedback');
+        fb.classList.remove('hidden', 'bg-emerald-950/80', 'bg-rose-950/80');
+
+        if (selectedIdx === correctIdx) {
+          const earnedXP = Math.max(30 - (this.currentQuestionHintsUsed * 5), 10);
+          fb.classList.add('bg-emerald-950/80', 'border', 'border-emerald-500', 'text-emerald-200');
+          fb.innerHTML = `
+            <strong>Jawaban Tepat!</strong> Kamu mendapatkan +${earnedXP} XP.
+          `;
+          this.addXP(earnedXP, `Soal Aplikasikan Level ${this.currentAppLevel}`);
+          confetti({ particleCount: 25, spread: 50 });
+
+          if (this.currentAppLevel < 4) {
+            setTimeout(() => this.loadAplikasikanLevel(this.currentAppLevel + 1), 1500);
+          } else {
+            this.completeModuleStage('aplikasikan');
+          }
+        } else {
+          fb.classList.add('bg-rose-950/80', 'border', 'border-rose-500', 'text-rose-200');
+          fb.innerHTML = `<strong>Belum Tepat:</strong> Coba gunakan hint untuk membantu menemukan penyelesaian.`;
+        }
+      }
+
+      updatePhSimulator() {
+        const val = parseInt(document.getElementById('ph-slider').value);
+        const conc = `10⁻${val} M`;
+        
+        document.getElementById('ph-h-val').innerText = conc;
+
+        let status = "Netral";
+        if (val < 7) status = "Asam";
+        if (val > 7) status = "Basa";
+
+        document.getElementById('ph-val-display').innerText = `${val}.0 (${status})`;
+
+        const items = {
+          1: { name: "Asam Lambung", desc: "Tingkat keasaman ekstrem ($10^{-1}$ M) melarutkan makanan.", emoji: "🧪" },
+          3: { name: "Jus Lemon", desc: "Sangat asam dengan ion hidrogen tinggi ($10^{-3}$ M).", emoji: "🍋" },
+          7: { name: "Air Murni", desc: "Keseimbangan sempurna ($10^{-7}$ M) netral.", emoji: "💧" },
+          10: { name: "Sabun Cuci", desc: "Bersifat basa ($10^{-10}$ M).", emoji: "🧼" }
+        };
+
+        const item = items[val] || { name: `Cairan pH ${val}`, desc: `Konsentrasi ion hidrogen $10^{-${val}}$ M.`, emoji: "🧪" };
+        document.getElementById('ph-substance-name').innerText = item.name;
+        document.getElementById('ph-substance-desc').innerText = item.desc;
+        document.querySelector('#ph-substance-card span').innerText = item.emoji;
+      }
+
+      updateDbSimulator() {
+        const val = parseInt(document.getElementById('db-slider').value);
+        document.getElementById('db-val-display').innerText = `${val} dB`;
+
+        const sounds = {
+          0: { name: "Ambang Pendengaran", desc: "Suara terkecil yang bisa didengar manusia ($I_0$).", emoji: "👂" },
+          20: { name: "Bisikan Halus", desc: "100 kali lebih intens dibanding ambang batas.", emoji: "🤫" },
+          60: { name: "Percakapan Biasa", desc: "1.000.000 ($10^6$) kali lipat ambang batas.", emoji: "🗣️" },
+          100: { name: "Konser Musik / Motor", desc: "10.000.000.000 ($10^{10}$) kali lipat ambang batas.", emoji: "🎸" },
+          140: { name: "Pesawat Jet Lepas Landas", desc: "Batas ambang rasa sakit pada telinga manusia.", emoji: "✈️" }
+        };
+
+        const sound = sounds[val] || { name: `Suara ${val} dB`, desc: `Skala intensitas logaritmik ${val} dB.`, emoji: "🔊" };
+        document.getElementById('db-sound-name').innerText = sound.name;
+        document.getElementById('db-sound-desc').innerText = sound.desc;
+        document.querySelector('#db-sound-card span').innerText = sound.emoji;
+      }
+
+      submitUkhrowiReflection() {
+        const txt = document.getElementById('ukhrowi-gratitude-input').value.trim();
+        if (this.currentStudent) {
+          this.currentStudent.gratitude_journal = txt;
+          this.completeModuleStage('ukhrowi');
+          this.addXP(30, 'Refleksi Ukhrowi');
+          confetti({ particleCount: 100, spread: 100, origin: { y: 0.5 } });
+          this.navigateTo('progress');
+        }
+      }
+
+      completeModuleStage(stageId) {
+        if (!this.currentStudent) return;
+        if (!this.currentStudent.completed_stages) this.currentStudent.completed_stages = [];
+
+        if (!this.currentStudent.completed_stages.includes(stageId)) {
+          this.currentStudent.completed_stages.push(stageId);
+          this.saveCurrentStudent();
+        }
+        
+        this.navigateTo('dashboard');
+      }
+
+      renderProgressView() {
+        if (!this.currentStudent) return;
+
+        const strengths = document.getElementById('diag-strengths');
+        const weaknesses = document.getElementById('diag-weaknesses');
+
+        const completed = this.currentStudent.completed_stages || [];
+
+        strengths.innerHTML = completed.map(c => `<li>Penguasaan Modul ${c.toUpperCase()}</li>`).join('') || '<li>Belum ada modul yang diselesaikan</li>';
+        
+        const allStages = ['telaah', 'eksplorasi', 'rumuskan', 'presentasikan', 'aplikasikan', 'duniawi', 'ukhrowi'];
+        const remaining = allStages.filter(s => !completed.includes(s));
+
+        weaknesses.innerHTML = remaining.map(r => `<li>Modul ${r.toUpperCase()} perlu diselesaikan</li>`).join('') || '<li>Selamat! Semua modul telah dikuasai!</li>';
+
+        // Render Badges
+        const container = document.getElementById('badges-container');
+        const unlocked = this.currentStudent.unlocked_badges || [];
+
+        container.innerHTML = BADGES_MASTER.map(b => {
+          const isUnlocked = unlocked.includes(b.id);
+          return `
+            <div class="bg-slate-900 border ${isUnlocked ? 'border-amber-500/50' : 'border-slate-800 opacity-50'} p-3 rounded-2xl text-center space-y-1">
+              <div class="w-10 h-10 mx-auto rounded-full ${isUnlocked ? 'bg-amber-500/20 text-amber-400' : 'bg-slate-800 text-slate-600'} flex items-center justify-center text-lg">
+                <i class="fa-solid ${b.icon}"></i>
+              </div>
+              <span class="text-xs font-bold text-white block leading-tight">${b.name}</span>
+              <span class="text-[10px] text-slate-400 block">${b.desc}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      renderCertificateView() {
+        if (!this.currentStudent) return;
+        document.getElementById('cert-student-name').innerText = this.currentStudent.name;
+        document.getElementById('cert-student-class').innerText = `Kelas ${this.currentStudent.class} SMA/MA`;
+        document.getElementById('cert-xp').innerText = `${this.currentStudent.total_xp} XP`;
+        
+        const now = new Date();
+        document.getElementById('cert-date').innerText = now.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      openUserSwitchModal() {
+        const modal = document.getElementById('modal-user-switch');
+        modal.classList.remove('hidden');
+
+        const container = document.getElementById('modal-user-list');
+        const students = this.getAllStudents();
+
+        container.innerHTML = students.map(s => `
+          <button onclick="app.switchStudentProfile('${s.student_id}')" class="w-full text-left p-3 rounded-xl ${s.student_id === this.currentStudent?.student_id ? 'bg-brand-teal/20 border-brand-teal' : 'bg-slate-900 border-slate-800'} border flex items-center justify-between text-xs transition">
+            <div>
+              <strong class="text-white block">${s.name}</strong>
+              <span class="text-slate-400">Kelas ${s.class} • ${s.total_xp} XP</span>
+            </div>
+            ${s.student_id === this.currentStudent?.student_id ? '<span class="text-brand-teal font-bold">Aktif</span>' : ''}
+          </button>
+        `).join('');
+      }
+
+      closeUserSwitchModal() {
+        document.getElementById('modal-user-switch').classList.add('hidden');
+      }
+    }
+
+    // INITIALIZE GLOBAL APP INSTANCE ON DOM LOAD
+    let app;
+    window.onload = function() {
+      app = new LogaritmaApp();
+    };
+  </script>
 </body>
 </html>
